@@ -1,0 +1,46 @@
+<section class="bg-light py-5 py-md-6">
+    <div class="container-xl">
+
+        <div class="row">
+            {% if content.title is defined and content.title|length > 0 %}
+                <div class="col-lg-5 col-xxl-4">
+                    <h2 class="text-3xl text-dark">
+                        {{ content.title|raw }}
+                    </h2>
+                </div>
+            {% endif %}
+            {% if content.text is defined and content.text|length > 0 %}
+                <div class="col-lg-6 col-xxl-5 d-flex flex-column justify-content-end">
+                    <p class="m-0">
+                        {{ content.text|raw }}
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+
+        {% if content.pages is defined and content.pages|length > 0 %}
+            <div class="row mt-3 mt-lg-5">
+
+                {% for page in content.pages %}
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        {% if page.excerptImages is defined and page.excerptImages|length > 0 %}
+                            {% set image = page.excerptImages[0] %}
+                            <img src="{{ image.formats['800x800'] }}" alt="" class="img-fluid mb-1">
+                        {% endif %}
+                        {%  include 'components/button-orange-outline.html.twig'
+                            with {
+                                'label': page.excerptTitle|default(page.title),
+                                'width' : 'full',
+                                'extraClass': 'bg-white stretched-link',
+                                'url': sulu_content_path(page.url)
+                            }
+                        %}
+                    </div>
+        
+                {% endfor %}
+
+            </div>
+        {% endif %}
+
+    </div>
+</section>

@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+
+    <key>footer</key>
+
+    <meta>
+        <title lang="nl">Footer</title>
+        <title lang="en">Footer</title>
+    </meta>
+
+    <areas>
+        <area key="footer_locations">
+            <meta>
+                <title lang="nl">Footer lokaties</title>
+                <title lang="en">Footer locations</title>
+            </meta>
+        </area>
+        <area key="footer_missed">
+            <meta>
+                <title lang="nl">Footer gemist?</title>
+                <title lang="en">Footer missed</title>
+            </meta>
+        </area>
+        <area key="footer_jobs">
+            <meta>
+                <title lang="nl">Footer vacatures</title>
+                <title lang="en">Footer jobs</title>
+            </meta>
+        </area>
+        <area key="footer_brands">
+            <meta>
+                <title lang="nl">Footer merken</title>
+                <title lang="en">Footer brands</title>
+            </meta>
+        </area>
+    </areas>
+
+    <properties>
+    
+        <property name="title" type="text_line" mandatory="true">
+            <meta>
+                <title lang="nl">Titel</title>
+                <title lang="en">Title</title>
+            </meta>
+            <tag name="sulu.node.name"/>
+        </property>
+
+        <property name="links" type="page_selection">
+            <meta>
+                <title lang="nl">Links</title>
+                <title lang="en">Links</title>
+            </meta>
+
+            <params>
+                <param name="properties" type="collection">
+                    <param name="title" value="title"/>
+                    <param name="article" value="article"/>
+                </param>
+            </params>
+        </property>
+
+        <property name="collection" type="smart_content">
+            <meta>
+                <title lang="nl">Collectie</title>
+                <title lang="en">Collection</title>
+            </meta>
+
+            <params>
+                <param name="provider" value="pages"/>
+                <param name="max_per_page" value="30"/>
+                <param name="page_parameter" value="p"/>
+                <param name="properties" type="collection">
+                    <param name="article" value="article"/>
+                    <param name="excerptTitle" value="excerpt.title"/>
+                </param>
+            </params>
+        </property>
+
+        <property name="textblock" type="text_editor">
+            <meta>
+                <title lang="nl">Tekstblok</title>
+                <title lang="en">Text block</title>
+            </meta>
+        </property>
+
+    </properties>
+      
+</template>

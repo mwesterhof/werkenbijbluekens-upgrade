@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    {% include 'partials/hero.html.twig' with {
+        'image' : content.header_image,
+        'title' : content.title
+    } %}
+
+    <div class="container py-5">
+        <div class="row">
+            {% for listitem in content.locations %}
+                <div class="col-12 col-md-6 col-xl-4">
+                    {% include 'partials/list-item-location.html.twig' %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% include 'partials/jobs-listing-inline.html.twig'
+        with {
+        'jobs': content.joboffers
+    }
+    %}
+
+    {%  include 'partials/application.html.twig'
+        with {
+            'label': 'Stuur een open sollicitatie!'
+        }
+    %}
+
+{% endblock %}

@@ -1,0 +1,3 @@
+{% if content.form is defined and content.form is not empty %}
+    {% include "partials/forms/form_jobapplication_" ~ content.form_type|default('full') ~ ".html.twig" %}
+{% endif %}

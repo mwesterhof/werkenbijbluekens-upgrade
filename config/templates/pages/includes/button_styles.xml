@@ -1,0 +1,100 @@
+<?xml version="1.0" ?>
+<properties xmlns="http://schemas.sulu.io/template/template"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.1.xsd">
+
+    <property name="btn_style" type="single_select" colspan="6">
+        <meta>
+            <title>Button stijl</title>
+        </meta>
+
+        <params>
+            <param name="default_value" value="btn-primary"/>
+
+            <param name="values" type="collection">
+
+                <param name="btn-primary">
+                    <meta>
+                        <title>primary</title>
+                    </meta>
+                </param>
+
+                <param name="btn-orange-arrow">
+                    <meta>
+                        <title>Oranje outline met pijltje</title>
+                    </meta>
+                </param>
+
+                <param name="btn-brand-grey">
+                    <meta>
+                        <title>Merkbutton</title>
+                    </meta>
+                </param>
+
+                <param name="btn-outline-primary">
+                    <meta>
+                        <title>primary-outline</title>
+                    </meta>
+                </param>
+
+                <param name="btn-white">
+                    <meta>
+                        <title>white</title>
+                    </meta>
+                </param>
+
+                <param name="btn-dark">
+                    <meta>
+                        <title>dark</title>
+                    </meta>
+                </param>
+
+                <param name="btn-primary-textlink">
+                    <meta>
+                        <title>Primaire kleur tekstlink</title>
+                    </meta>
+                </param>
+
+                <param name="square-cta-label">
+                    <meta>
+                        <title>Vierkant CTA label</title>
+                    </meta>
+                </param>
+
+                <param name="square-cta-spacer">
+                    <meta>
+                        <title>Vierkant CTA spacer</title>
+                    </meta>
+                </param>
+
+                <param name="square-cta-button">
+                    <meta>
+                        <title>Vierkant CTA button</title>
+                    </meta>
+                </param>
+
+                <param name="btn-dark-textlink">
+                    <meta>
+                        <title>dark text-link</title>
+                    </meta>
+                </param>
+
+                <param name="btn-white-textlink">
+                    <meta>
+                        <title>white text-link</title>
+                    </meta>
+                </param>
+<!--
+                <param name="btn-outline-light">
+                    <meta>
+                        <title>white-outline</title>
+                    </meta>
+                </param>
+
+                 -->
+
+            </param>
+        </params>
+    </property>
+
+</properties>

@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+
+    <key>analytics</key>
+
+    <meta>
+        <title lang="nl">Analytics instellingen</title>
+        <title lang="en">Analytics settings</title>
+    </meta>
+
+    <areas>
+        <area key="Analytics">
+            <meta>
+                <title lang="nl">Analytics instellingen</title>
+                <title lang="en">Analytics settings</title>
+            </meta>
+        </area>
+    </areas>
+
+    <properties>
+    
+        <property name="title" type="text_line" mandatory="true">
+            <meta>
+                <title lang="nl">Omschrijving</title>
+                <title lang="en">Description</title>
+            </meta>
+
+            <tag name="sulu.node.name"/>
+        </property>
+
+        <property name="gtm_auth" type="text_line" mandatory="true">
+            <meta>
+                <title lang="nl">GTM Auth</title>
+                <title lang="en">GTM Auth</title>
+                <info_text lang="nl">
+                    xxxxxxxxxxxxxx-xxxxxx
+                </info_text>
+                <info_text lang="en">
+                    xxxxxxxxxxxxxx-xxxxxx
+                </info_text>
+                </meta>
+        </property>
+
+        <property name="gtm_id" type="text_line" mandatory="true">
+            <meta>
+                <title lang="nl">GTM ID</title>
+                <title lang="en">GTM ID</title>
+                <info_text lang="nl">
+                    GTM-XXXXXXX
+                </info_text>
+                <info_text lang="en">
+                    GTM-XXXXXXX
+                </info_text>
+            </meta>
+
+        </property>
+
+        <property name="gtm_env" type="text_line" mandatory="true">
+            <meta>
+                <title lang="nl">GTM ENV</title>
+                <title lang="en">GTM ENV</title>
+                <info_text lang="nl">
+                    ENV-X
+                </info_text>
+                <info_text lang="en">
+                    ENV-X
+                </info_text>
+            </meta>
+        </property>
+
+    </properties>
+      
+</template>

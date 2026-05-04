@@ -1,0 +1,10 @@
+{% for row in form %}
+{% if row.vars.label == 'deal_pipeline_id' %}
+    <input type="hidden" name="{{ row.vars.full_name }}" id="{{ row.vars.id }}" value="{{ content.deal_pipeline_id }}"/>
+    {% do row.setRendered %}
+{% endif %}
+{% if row.vars.label == 'deal_stage_id' %}
+    <input type="hidden" name="{{ row.vars.full_name }}" id="{{ row.vars.id }}" value="{{ content.deal_stage_id }}"/>
+    {% do row.setRendered %}
+{% endif %}
+{% endfor %}

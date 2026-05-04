@@ -1,0 +1,141 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+
+    <key>function-profile</key>
+
+    <view>pages/function-profile</view>
+    <controller>Sulu\Bundle\WebsiteBundle\Controller\DefaultController::indexAction</controller>
+
+    <cacheLifetime>86400</cacheLifetime>
+
+    <meta>
+        <title lang="nl">Functieprofiel</title>
+    </meta>
+
+    <properties>
+
+        <xi:include href="includes/header.xml"
+                    xpointer="xmlns(sulu=http://schemas.sulu.io/template/template) xpointer(/sulu:properties/*)" />
+
+        <xi:include href="includes/resource_locator.xml"
+                    xpointer="xmlns(sulu=http://schemas.sulu.io/template/template) xpointer(/sulu:properties/*)" />
+
+        <property name="page_intro" type="text_area">
+            <meta>
+                <title lang="nl">Intro artikel</title>
+            </meta>
+        </property>
+
+        <block name="content_blocks" default-type="textblock">
+            <meta>
+                <title lang="nl">Content blokken</title>
+            </meta>
+            <types>
+                <type name="textblock">
+                    <meta>
+                        <title lang="nl">Tekstblok</title>
+                    </meta>
+                    <properties>
+                        <property name="title" type="text_line">
+                            <meta>
+                                <title lang="nl">Kopregel</title>
+                            </meta>
+                            <params>
+                                <param name="headline" value="true"/>
+                            </params>
+                        </property>
+                        <property name="text" type="text_editor">
+                            <meta>
+                                <title lang="nl">Tekst</title>
+                            </meta>
+                        </property>
+                    </properties>
+                </type>
+                <type name="quote">
+                    <meta>
+                        <title lang="nl">Quote</title>
+                    </meta>
+                    <properties>
+                        <property name="text" type="text_editor">
+                            <meta>
+                                <title lang="nl">Quote</title>
+                            </meta>
+                        </property>
+                    </properties>
+                </type>
+            </types>
+
+        </block>
+
+        <property name="story" type="single_page_selection">
+            <meta>
+                <title lang="nl">Verhaal</title>
+            </meta>
+
+        </property>
+
+        <property name="joboffers" type="smart_content">
+            <meta>
+                <title lang="nl">Vacatures</title>
+            </meta>
+            <params>
+                <param name="provider" value="pages"/>
+                <param name="page_parameter" value="p"/>
+                <param name="properties" type="collection">
+                    <param name="article" value="article"/>
+                    <param name="location" value="location"/>
+                    <param name="function_profile" value="function_profile"/>
+                    <param name="number_of_hours" value="number_of_hours"/>
+                    <param name="excerptTitle" value="excerpt.title"/>
+                    <param name="excerptTags" value="excerpt.tags"/>
+                    <param name="excerptImages" value="excerpt.images"/>
+                    <param name="excerptDescription" value="excerpt.description"/>
+                </param>
+            </params>
+        </property>
+
+        <section name="joboffer_form">
+            <meta>
+                <title lang="nl">Sollicicatie formulier</title>
+            </meta>
+            <properties>
+                <property name="joboffer_image" type="media_selection" colspan="6">
+                    <meta>
+                        <title lang="nl">Afbeelding</title>
+                    </meta>
+                </property>
+
+                <property name="form" type="single_form_selection">
+                    <meta>
+                        <title lang="nl">Formulier</title>
+                    </meta>
+
+                    <params>
+                        <param name="resourceKey" value="page"/>
+                    </params>
+                </property>
+            </properties>
+        </section>
+
+        <section name="preview_intro">
+            <meta>
+                <title lang="nl">Preview intro</title>
+            </meta>
+            <properties>
+                <property name="preview_title" type="text_line">
+                    <meta>
+                        <title lang="nl">Titel</title>
+                    </meta>
+                </property>
+                <property name="preview_intro" type="text_area">
+                    <meta>
+                        <title lang="nl">Introtext</title>
+                    </meta>
+                </property>
+            </properties>
+        </section>
+    </properties>
+</template>

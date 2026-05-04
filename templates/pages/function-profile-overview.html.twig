@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    {% include 'partials/hero.html.twig' with {
+        'image' : content.header_image,
+        'title' : content.title
+    } %}
+
+    <div class="container py-5">
+        <div class="row">
+            {% for listitem in content.function_profiles %}
+                <div class="col-12 col-md-6 col-xl-4">
+                    {% include 'partials/list-item.html.twig' %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% set story = sulu_content_load(content.story) %}
+
+    {% include 'partials/my-story.html.twig' with {
+        'story': story,
+        'bgcolor': 'bg-light'
+    } %}
+
+    {%  include 'partials/application.html.twig'
+        with {
+            'label': 'Stuur een open sollicitatie!'
+        }
+    %}
+
+{% endblock %}

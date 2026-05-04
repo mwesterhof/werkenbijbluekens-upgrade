@@ -1,0 +1,36 @@
+<div class="bg-light bg-lg-white">
+    <div class="container-xl p-lg-0 max-width_1920">
+        <div class="row no-gutters">
+            <div class="col-12">
+                <div class="functiongroup_glide glide">
+
+                    <div class="glide__track" data-glide-el="track">
+                        <div class="glide__slides">
+
+                            {% for profile in profiles %}
+                            <div class="item">
+                                {% include 'partials/carousel-item.html.twig'
+                                    with {
+                                        'story': profile,
+                                        'readmoreLink': true,
+                                        'sideLabel': true
+                                    }
+                                %}
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        {%  include 'components/carousel-controlls.html.twig'
+                            with {
+                                'items': profiles,
+                                'label': 'functieprofielen'
+                        }
+                        %}
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

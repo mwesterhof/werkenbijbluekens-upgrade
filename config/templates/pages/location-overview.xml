@@ -1,0 +1,83 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+
+    <key>location-overview</key>
+
+    <view>pages/location-overview</view>
+    <controller>Sulu\Bundle\WebsiteBundle\Controller\DefaultController::indexAction</controller>
+
+    <cacheLifetime>86400</cacheLifetime>
+
+    <meta>
+        <title lang="nl">Locatie overzicht</title>
+    </meta>
+    <properties>
+        <xi:include href="includes/header.xml"
+                    xpointer="xmlns(sulu=http://schemas.sulu.io/template/template) xpointer(/sulu:properties/*)" />
+
+        <xi:include href="includes/resource_locator.xml"
+                    xpointer="xmlns(sulu=http://schemas.sulu.io/template/template) xpointer(/sulu:properties/*)" />
+
+        <property name="locations" type="smart_content">
+            <meta>
+                <title lang="nl">Locaties</title>
+            </meta>
+            <params>
+                <param name="provider" value="pages"/>
+                <param name="max_per_page" value="100"/>
+                <param name="page_parameter" value="p"/>
+                <param name="properties" type="collection">
+                    <param name="article" value="article"/>
+                    <param name="excerptTitle" value="excerpt.title"/>
+                    <param name="excerptTags" value="excerpt.tags"/>
+                    <param name="excerptImages" value="excerpt.images"/>
+                    <param name="excerptDescription" value="excerpt.description"/>
+                </param>
+            </params>
+        </property>
+        <section name="joboffer_form">
+            <meta>
+                <title lang="nl">Sollicicatie formulier</title>
+            </meta>
+            <properties>
+                <property name="joboffer_image" type="media_selection" colspan="6">
+                    <meta>
+                        <title lang="nl">Afbeelding</title>
+                    </meta>
+                </property>
+
+                <property name="form" type="single_form_selection">
+                    <meta>
+                        <title lang="nl">Formulier</title>
+                    </meta>
+
+                    <params>
+                        <param name="resourceKey" value="page"/>
+                    </params>
+                </property>
+            </properties>
+        </section>
+
+        <property name="joboffers" type="smart_content">
+            <meta>
+                <title lang="nl">Vacatures</title>
+            </meta>
+            <params>
+                <param name="provider" value="pages"/>
+                <param name="max_per_page" value="1"/>
+                <param name="page_parameter" value="p"/>
+                <param name="properties" type="collection">
+                    <param name="article" value="article"/>
+                    <param name="excerptTitle" value="excerpt.title"/>
+                    <param name="excerptTags" value="excerpt.tags"/>
+                    <param name="excerptImages" value="excerpt.images"/>
+                    <param name="excerptDescription" value="excerpt.description"/>
+                </param>
+            </params>
+        </property>
+
+    </properties>
+</template>

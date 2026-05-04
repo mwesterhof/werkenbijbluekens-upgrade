@@ -1,0 +1,81 @@
+{% if content.block_image_position is defined %}
+    {% if content.block_image_position == 'afbeelding_links' %}
+        {% set colPadding = 'pl-md-3 pl-lg-4 pl-xl-6 offset-lg-6' %}
+        {% set colAlignment  = 'mr-auto' %}
+    {% else %}
+        {% set colPadding = 'pr-md-3 pr-lg-4 pr-xl-6' %}
+    {% endif %}
+{% endif %}
+
+<div class="my-5 my-md-6 position-relative">
+    <div class="position-absolute top-0 left-0 right-0 h-100 p-0 d-none d-lg-block w-100 max-width_1920 margin-auto">
+        <div class="row h-100">
+            <div class="{{ colAlignment|default('ml-auto') }} col-6 h-100">
+                {% if content.block_image|length > 0 %}
+                    <img src="{{ content.block_image[0].formats['1920x1080'] }}" alt="" class="w-100 h-100 object-fit_cover">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="container-xl">
+        <div class="row">
+            <div class="col-md-6 pb-2 pb-md-0 d-lg-none
+                        {% if content.block_image_position != 'afbeelding_links' %}
+                            order-md-last pr-lg-0
+                        {% else %}
+                            pl-lg-0
+                        {% endif %}">
+                {% if content.block_image|length > 0 %}
+                    <img src="{{ content.block_image[0].formats['1920x1080'] }}" alt="" class="img-fluid">
+                {% endif %}
+            </div>
+            <div class="{{ colPadding }} col-md-6 py-xl-5">
+                <h2 class="h3 mb-lg-2">
+                    {{ content.block_title|default('-- no title --')|raw }}
+                </h2>
+
+                <div class="pl-xl-5">
+                    <p class="mb-0">
+                        {{ content.block_text|default('-- no intro --')|raw }}
+                    </p>
+
+                    {% if content.buttons is defined and content.buttons|length > 0 %}
+                        <div>
+                            {% for button in content.buttons %}
+                                {% if button.btn_style is defined and button.btn_style is not empty %}
+                                    {%  include 'components/button.html.twig'
+                                        with {
+                                            'extraClass': ''
+                                        }
+                                    %}
+                                {% endif %}
+                                {% if button.btn_style is empty %}
+                                    {%  include 'components/button-orange-outline.html.twig'
+                                        with {
+                                            'label': content.block_button_label|default('-- no label --'),
+                                            'url': button.btn_url|default('#')
+                                        }
+                                    %}
+                                {% endif %}
+                                
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    {% if  content.block_button_link| length > 0 %}
+                        {% set buttonLink = sulu_content_load(content.block_button_link) %}
+                        {%  include 'components/button-orange-outline.html.twig'
+                            with {
+                                'label': content.block_button_label|default('-- no label --'),
+                                'url': buttonLink.content.url|default('#')
+                            }
+                        %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

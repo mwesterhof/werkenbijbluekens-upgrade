@@ -1,0 +1,203 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+
+{% set location = sulu_content_load(content.location) %}
+
+{% if content.locations|length > 0 %}
+    {% for joblocation in content.locations %}
+        {% set location = sulu_content_load(joblocation.uuid) %}
+        <script type="application/ld+json">
+            {
+                "@context": "http://schema.org",
+                "@type": "JobPosting",
+                "datePosted": "{{ created|date("Y-m-d") }}",
+                "description": "{{ content.content_blocks[0].block_text|striptags }}",
+                "industry": "Automotive",
+                "jobLocation": {
+                    "@type": "Place",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": "{{ location.content.city }}"
+                    }
+                },
+                "salaryCurrency": "EUR",
+                "title": "{{ content.title }}",
+                "hiringOrganization": {
+                    "@type": "Organization",
+                    "name": "Bluekens Truck en Bus B.V.",
+                    "logo": "{{ app.request.getSchemeAndHttpHost() }}{{ asset('build/frontend/images/logo_bluekens.svg') }}"
+                }
+            }
+        </script>
+    {% endfor %}
+{% endif %}
+
+
+{% include 'partials/hero.html.twig' with {
+    'image' : content.header_image,
+    'title' : content.title
+} %}
+
+<div class="container py-5">
+
+    {% if content.summary %}
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="align-items-center bg-primary d-flex justify-content-between p-2">
+                
+                    <span class="font-weight-regular h5 m-0 p-0 text-white">
+
+                        {% if content.locations|length > 0 %}
+                            {% for joblocation in content.locations %}
+                                {% set location = sulu_content_load(joblocation.uuid) %}
+                                {{ location.content.city }}{{ not loop.last ? ',' }}
+                            {% endfor %}
+                        {% endif %}
+
+                        {% if content.fulltime %}
+                            / Fulltime
+                        {% else %}
+                            / Parttime
+                        {% endif %}
+                        
+                        {% if content.number_of_hours|length > 0 %}
+                            / {{ content.number_of_hours }} uur
+                        {% endif %}
+                    </span>
+
+
+                    {%  include 'components/button-orange-with-arrow.html.twig'
+                        with {
+                        'extraClass': '',
+                        'label': 'Solliciteer direct',
+                        'url':  '#solliciteer'
+                    }
+                    %}
+
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row d-print-block">
+        <div class="col-md-7">
+
+            <div class="container">
+                <p class="lead text-dark">{{ content.page_intro|striptags }}</p>
+            </div>
+
+            {% for block in content.content_blocks %}
+                {% include "contentBlocks/#{block.type}.html.twig" with {
+                    content: block,
+                    view: view.content_blocks[loop.index0],
+                } only %}
+            {% endfor %}
+
+        </div>
+
+        <div class="col-md-5 col-lg-4 ml-lg-auto">
+
+            {% include 'partials/share-this.html.twig' %}
+
+            {% if content.block_image| length > 0 %}
+                {% set bg_image = content.block_image[0].formats['700x'] %}
+            {% endif %}
+            <div class="border border-secondary p-4 mb-3" style="background-image:url('{{bg_image is defined ? bg_image}}'); background-repeat: no-repeat;background-size: contain;background-position: right bottom;">
+                <h6 class="text-secondary w-75 mb-2">
+                    Wij beantwoorden<br>
+                    graag al je vragen
+                </h6>
+
+
+                <p class="font-weight-semibold">
+                    <strong class="font-weight-semibold text-black-50">Mail</strong><br>
+                    <a href="mailto:{{ content.email }}" target="_blank" class="no-deco text-black">{{ content.email }}</a><br>
+                </p>
+
+                <p class="font-weight-semibold">
+                    <strong class="font-weight-semibold text-black-50">Bel</strong><br>
+                    <a href="tel:{{ content.phonenumber }}" target="_blank" class="no-deco text-black">{{ content.phonenumber }}</a><br>
+                </p>
+
+                <a href="https://wa.me/message/UH4QBTDE3GNZA1" target="_blank" class="no-deco d-flex bg-success align-items-center">
+
+                    {% include 'svg/bluekens-cta-whatsapp.svg.twig' %}
+
+                    <p class="font-weight-semibold m-0 text-white">
+                        Whatsapp                   
+                    </p>
+                </a>
+
+            </div>
+
+            {% set snippet = sulu_snippet_load_by_area('jobalert_form') %}
+
+            {% if snippet %}
+
+                <div class="bg-secondary p-3 pt-0_5">
+                    <div class="align-items-lg-center d-flex flex-column flex-lg-row mb-3 mt-1 text-center">
+                        <div>
+                            {% include "svg/bell.svg.twig" %}
+                        </div>
+                        {% if snippet.content.title is defined and snippet.content.title|length > 0 %}
+                            <span class="font-weight-bold ml-lg-4 text-4xl text-uppercase text-white">
+                                {{ snippet.content.title|raw }}
+                            </span>
+                        {% endif %}
+                    </div>
+
+                    {% if snippet.content.form %}
+
+                        {% form_theme snippet.content.form with [
+                            'formthemes/bootstrap_4_jobalert_sidebar.html.twig'
+                        ] %}
+
+                        {{ form_start(snippet.content.form, {'attr': {
+                            'id': 'jobalert',
+                            'data-gtm-label': 'jobalert',
+                            'novalidate': '',
+                            'class':'needs-validation ajaxform formstyle_clean_dark form_jobalert'
+                        }}) }}
+
+                            {# we make hidden fields of the two fields with labels: source__title and source__url #}
+                            {% include "formthemes/source_fields.html.twig" with { 'form': snippet.content.form} %}
+                            {% include "formthemes/automation_fields.html.twig" with { 'form': snippet.content.form} %}
+
+                            {# wrap all form fields inside this div se we can hide all fields when successfull submitted #}
+                            
+                            <div class="hide-when-success">
+                                {{ form_widget(snippet.content.form, { 'attr': {'class': ' '} }) }}
+                            </div>
+
+                            <div class="alert alert-dismissible alert-success bg-transparent border-0 p-0 text-dark" data-gtm-label="jobalert" style="display:none;">
+                                    <h2 class="font-weight-demi mb-4 text-3xl w-75">
+                                        Aangemeld
+                                    </h2>
+                                    <p class="mb-4">
+                                        voor de Job Alert
+                                    </p>
+                            </div>
+                            
+                        {{ form_end(snippet.content.form) }}
+
+                    {% endif %}
+
+                </div>
+                   
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+<a name="solliciteer"></a>
+
+{%  include 'partials/application.html.twig'
+    with {
+        'type':  'form-left',
+        'label': 'Solliciteer nu op deze vacature!'
+    }
+%}
+
+{% endblock %}

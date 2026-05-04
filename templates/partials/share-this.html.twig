@@ -1,0 +1,32 @@
+<div class="bg-primary p-3 mb-3">
+    <h5 class="text-white pb-3">
+        {{ label|default('Deel deze vacature') }}
+    </h5>
+
+    <div class="d-flex align-items-start">
+        <div class="mr-1">
+            <a href="mailto:?subject=Bekijk%20deze%20vacature&amp;body=Bekijk%20deze%20vacature%20op%20Werken%20bij%20Bluekens%0D%0A%0D%0A{{ app.request.uri|url_encode }}" class="d-block bg-secondary text-center hover-bg-to-dark" title="Deel via e-mail">
+                <img src="{{ asset('build/frontend/images/mail-icon.svg') }}" alt="Mail" class="img-fluid w-100">
+            </a>
+        </div>
+        <div class="mr-1">
+            <a href="https://wa.me/?text={{ app.request.uri|url_encode }}" class="d-block d-lg-none bg-secondary text-center hover-bg-to-dark" title="Deel via Whatsapp">
+                <img src="{{ asset('build/frontend/images/wa-icon.svg') }}" alt="Whatsapp" class="img-fluid w-100">
+            </a>
+
+            <a href="https://api.whatsapp.com/send?text={{ app.request.uri|url_encode }}" class="d-none d-lg-block bg-secondary text-center hover-bg-to-dark" title="Deel via Whatsapp" target="_blank">
+                <img src="{{ asset('build/frontend/images/wa-icon.svg') }}" alt="Whatsapp" class="img-fluid w-100">
+            </a>
+        </div>
+        <div class="mr-1">
+            <a href="http://www.linkedin.com/shareArticle?mini=true&url={{ app.request.uri }}%3Futm_source%3Dlinkedin%26utm_medium%3Dwebsite%26utm_campaign=shared-backlink&title%3D{{ content.title }}&summary%3D{{ content.page_intro }}&source%3D{{ app.request.uri }}" class="d-block bg-secondary text-center hover-bg-to-dark" title="Deel via LinkedIn" target="_blank">
+                <img src="{{ asset('build/frontend/images/lk-icon.svg') }}" alt="LinkedIn" class="img-fluid w-100">
+            </a>
+        </div>
+        <div class="mr-1">
+            <a href="http://www.facebook.com/sharer/sharer.php?u={{ app.request.uri|url_encode }}%3Futm_source=facebook%26utm_medium=website%26utm_campaign=shared-backlink" class="d-block bg-secondary text-center hover-bg-to-dark" title="Deel via Facebook" target="_blank">
+                <img src="{{ asset('build/frontend/images/fb-icon.svg') }}" alt="Facebook" class="img-fluid w-100">
+            </a>
+        </div>
+    </div>
+</div>

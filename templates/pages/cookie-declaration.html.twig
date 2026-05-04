@@ -1,0 +1,10 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <section class="container">
+        <div class="col-12">
+            <h1>{{ content.title }}</h1>
+            {% include 'partials/cookiebot/declaration-script.html.twig' %}
+        </div>
+    </section>
+{% endblock %}

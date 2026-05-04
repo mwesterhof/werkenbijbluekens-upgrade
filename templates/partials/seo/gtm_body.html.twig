@@ -1,0 +1,17 @@
+{% set GTM_settings = sulu_snippet_load_by_area('Analytics') %}
+
+{% if GTM_settings|length > 0 %}
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ GTM_settings.content.gtm_id }}&gtm_auth={{ GTM_settings.content.gtm_auth }}&gtm_preview={{ GTM_settings.content.gtm_env }}&gtm_cookies_win=x"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+{% else %}
+    <!-- no GTM settings defined in config -->
+
+{% endif %}
+
+
+
+

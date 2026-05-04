@@ -1,0 +1,46 @@
+
+<div class="position-relative margin-auto max-width_1920">
+    <div class="position-relative z1">
+        <div class="container-lg">
+            <div class="row">
+                <div class="col-12 col-lg-5 mb-3 mb-lg-5 {{ content.text_position == 'rechts' ? ' ml-auto x' }}">
+                    <h2 class="line-height-1 pb-3 pt-3 pt-lg-5 text-lg-5xl text-white">
+                        {{ content.block_title|raw }}
+                    </h2>
+                    <div class="bg-white p-lg-3">
+                        {{ content.block_text|raw }}
+
+                        {% if content.buttons is defined and content.buttons|length > 0 %}
+                            <div>
+                                {% for button in content.buttons %}
+                                    {%  include 'components/button.html.twig'
+                                        with {
+                                            'extraClass': ''
+                                        }
+                                    %}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        {% if  content.block_button_link| length > 0 %}
+                            {% set buttonLink = sulu_content_load(content.block_button_link) %}
+
+                            {%  include 'components/button-orange-outline.html.twig'
+                                with {
+                                    'width': '',
+                                    'label': content.block_button_label|default('-- no label --'),
+                                    'url': buttonLink.content.url|default('#')
+                                }
+                            %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="h-100 max-width_1920 position-lg-absolute top-0 w-100">
+        {% if content.block_image|length > 0 %}
+            <img src="{{ content.block_image[0].formats['1920x1080'] }}" alt="" class="w-100 h-100 object-fit_cover">
+        {% endif %}
+    </div>
+</div>

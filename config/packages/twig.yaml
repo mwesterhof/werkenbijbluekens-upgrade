@@ -1,5 +1,11 @@
 twig:
     file_name_pattern: '*.twig'
+    default_path: '%kernel.project_dir%/templates'
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    globals:
+        joboffer_overview_uuid: '%env(JOBOFFER_OVERVIEW_UUID)%'
+        cookiebot_domain_group_id: "%env(COOKIEBOT_DOMAIN_GROUPID)%"
 
 when@test:
     twig:

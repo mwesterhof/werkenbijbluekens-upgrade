@@ -1,0 +1,3 @@
+<a href="{{ url|default('no-url-entered') }}" class="d-flex d-lg-inline-flex align-items-center border bg-secondary border-secondary font-weight-bold font-size-btn hover-bg-to-dark justify-content-between no-deco px-2 py-0_5 text-white text-uppercase {{ extraClass is defined ? extraClass }}" {{ target is defined ? 'target='~ target }}>
+    {{ label|default('-- label --')|raw }}
+</a>

@@ -1,0 +1,39 @@
+<figure class="position-relative h-100 d-flex flex-column">
+    {% if listitem.excerptImage is defined %}
+        <img src="{{ listitem.excerptImage.formats['552x435'] }}" alt="{{ listitem.excerptImage.title }}" class="img-fluid">
+    {% endif %}
+    <figcaption class="bg-light bg-lg-white flex-grow-1 d-flex flex-column px-1 px-lg-3 py-3">
+        <span class="small font-source-sans-pro font-weight-bold text-black-50 text-uppercase">
+            {% if listitem.number_of_hours|length > 0 %}
+                {{ listitem.number_of_hours }} uur -
+            {% endif %}
+
+
+            {% if listitem.locations|length > 0 %}
+                {% set jobs  = listitem.locations|split(' ') %}
+                {% for joblocation in jobs %}
+                    {% set location = sulu_content_load(joblocation) %}
+                    {{ location.content.city }}{{ not loop.last ? ',' }}
+                {% endfor %}
+            {% endif %}
+
+     
+        </span>
+        <h2 class="h5 my-1">
+            {{ listitem.excerptTitle ? listitem.excerptTitle|raw : listitem.title|raw }}
+        </h2>
+        <div class="">
+            {{ listitem.excerptDescription|raw }}
+        </div>
+        <div class="mt-auto text-secondary">
+            {%  include 'components/button-orange-outline.html.twig'
+                with {
+                'width': 'full',
+                'label': 'Bekijk de vacature',
+                'url': listitem.url,
+                'extraClass': 'stretched-link'
+            }
+            %}
+        </div>
+    </figcaption>
+</figure>

@@ -1,0 +1,60 @@
+
+
+<header class="js-topnav mh-head bg-dark shadow-lg z1 position-relative text-sm">
+    <div class="container-xl">
+    {% block header %}
+        <nav class="navbar navbar-dark bg-dark p-0 {{ template|default() != 'joboffer' ? ' navbar-expand-xl ' }}">
+            <a class="navbar-brand" href="{{ sulu_content_root_path() }}">
+                <img src="{{ asset('build/frontend/images/logo-werkenbij-bluekens-wit.svg') }}" alt="Werken bij Bluekens" class="img-fluid" style="max-width:220px">
+            </a>
+
+            <div class="collapse navbar-collapse justify-content-md-end" id="navbarNavMain">
+                <div class="navbar-nav">
+                    {% for item in sulu_navigation_root_tree('main') %}
+                        {% set page = sulu_content_load(item.id) %}
+                        {% set excerptTitle = page.extension.excerpt.title %}
+                        <a href="{{ sulu_content_path(item.url, item.webspaceKey) }}" title="{{ excerptTitle|default(item.title) }}" class="nav-item nav-link text-white text-uppercase hover-txt-to-bold {{ item.url in app.request.pathinfo  ? ' font-weight-normal' : ' font-weight-light'}}">{{ excerptTitle|default(item.title) }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="align-items-center d-flex">
+                <a class="col-lg-auto font-weight-bold nav-item nav-link text-white text-uppercase bg-secondary hover-bg-to-dark py-3 px-2" href="/vacatures">
+                    Vacatures
+                </a>
+
+                <div class="d-none px-4 {{ template|default() == 'joboffer' ? ' d-md-flex ' }}">
+
+                    {% if content.phonenumber is defined and content.phonenumber|length > 0 %}
+                        <a href="tel:{{ content.phonenumber|phonefilter }}" class="bg-primary" style="margin-left: 8px;">
+                            {% include "svg/bluekens-cta-phone.svg.twig" %}
+                        </a>
+                    {% endif %}
+
+                    {% if content.email is defined and content.email|length > 0 %}
+                        <a href="mailto:{{ content.email }}" class="bg-primary" style="margin-left: 8px;">
+                            {% include "svg/bluekens-cta-mail.svg.twig" %}
+                        </a>
+                    {% endif %}
+         
+
+                    {% if content.mobilephone is defined and content.mobilephone|length > 0 %}
+                        <a href="https://wa.me/{{ content.mobilephone|phonefilter }}" class="bg-teal" style="margin-left: 8px;" target="_blank">
+                            {% include "svg/bluekens-cta-whatsapp.svg.twig" %}
+                        </a>
+                    {% endif %}
+                  
+                </div>
+
+                <a class="navbar-toggler border-0" type="button"
+                        data-toggle="collapse" data-target="#navbarNavMain"
+                        aria-controls="navbarNavMain" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </a>
+
+            </div>
+
+        </nav>
+    {% endblock %}
+    </div>
+</header>

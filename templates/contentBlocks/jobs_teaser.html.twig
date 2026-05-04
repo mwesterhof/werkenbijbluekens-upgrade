@@ -1,0 +1,18 @@
+{% if content.joboffers| length > 0 %}
+    {%  include 'partials/jobs-listing-inline.html.twig'
+        with {
+            'jobs': content.joboffers,
+            'title': content.title|default(),
+            'alljobs_link': content.alljobs_link|default(),
+            'alljobs_linklabel': content.alljobs_linklabel|default(),
+        }
+    %}
+{% else %}
+    {% if content.nojobs_text is defined and content.nojobs_text|length > 0 %}
+        <div class="margin-auto max-width_1920 bg-light py-md-5 py-5 py-lg-6">
+            <div class="container-xl">
+                {{ content.nojobs_text|raw  }}
+            </div>
+        </div>
+    {% endif %}
+{% endif %}

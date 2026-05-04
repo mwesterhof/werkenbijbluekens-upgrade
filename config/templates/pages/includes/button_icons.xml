@@ -1,0 +1,107 @@
+<?xml version="1.0" ?>
+<properties xmlns="http://schemas.sulu.io/template/template"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.1.xsd">
+
+    <property name="btn_icon" type="single_select" colspan="6">
+        <meta>
+            <title>Button icon</title>
+        </meta>
+
+        <params>
+            <param name="default_value" value="none"/>
+
+            <param name="values" type="collection">
+
+                <param name="none">
+                    <meta>
+                        <title>Geen</title>
+                    </meta>
+                </param>
+
+                <param name="harbers-icon-chevron_right-right">
+                    <meta>
+                        <title>Chevron naar rechts - rechterkant</title>
+                    </meta>
+                </param>
+
+                <param name="harbers-icon-mail-left">
+                    <meta>
+                        <title>Email - linkerkant</title>
+                    </meta>
+                </param>
+
+                <param name="harbers-icon-truck-left">
+                    <meta>
+                        <title>Truck - linkerkant</title>
+                    </meta>
+                </param>
+
+                <param name="harbers-icon-download-left">
+                    <meta>
+                        <title>Download - linkerkant</title>
+                    </meta>
+                </param>
+
+                <param name="harbers-icon-video-left">
+                    <meta>
+                        <title>Video - linkerkant</title>
+                    </meta>
+                </param>
+
+                <param name="harbers-icon-ctamail-left">
+                    <meta>
+                        <title>CTA Email</title>
+                    </meta>
+                </param>
+                
+                <param name="harbers-icon-ctaphone-left">
+                    <meta>
+                        <title>CTA Telefoon</title>
+                    </meta>
+                </param>
+<!--
+                <param name="icon-phone-left">
+                    <meta>
+                        <title>Telefoon - linkerkant</title>
+                    </meta>
+                </param>
+
+                <param name="icon-arrow_right-right">
+                    <meta>
+                        <title>Pijltje naar rechts - rechterkant</title>
+                    </meta>
+                </param>
+
+
+                <param name="icon-paper-left">
+                    <meta>
+                        <title>Document - linkerkant</title>
+                    </meta>
+                </param>
+
+                <param name="icon-newspaper-left">
+                    <meta>
+                        <title>Artikel - linkerkant</title>
+                    </meta>
+                </param>
+
+                <param name="icon-external-link-left">
+                    <meta>
+                        <title>Externe link - linkerkant</title>
+                    </meta>
+                </param>
+
+                <param name="btn-outline-light">
+                    <meta>
+                        <title>white-outline</title>
+                    </meta>
+                </param>
+
+                 -->
+
+            </param>
+        </params>
+    </property>
+
+</properties>

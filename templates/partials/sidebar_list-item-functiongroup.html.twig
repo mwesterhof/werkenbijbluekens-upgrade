@@ -1,0 +1,26 @@
+<figure class="position-relative d-flex flex-column">
+    {% for image in item.extension.excerpt.images %}
+        <img src="{{ image.formats['552x435'] }}" alt="{{ item.content.title }}" class="img-fluid">
+    {% endfor %}
+    <figcaption class="flex-grow-1 d-flex flex-column p-3">
+        <div class="small font-weight-bold text-black-50 text-uppercase mb-2">
+            Functieprofiel - {{ item.extension.excerpt.title }}</div>
+
+        <h2 class="h5 mb-3">
+            {{ item.content.preview_title }}
+        </h2>
+        <div class="pb-2">
+            {{ item.content.preview_intro|raw }}
+        </div>
+        <div class="mt-auto text-secondary">
+            {%  include 'components/button-orange-outline.html.twig'
+                with {
+                'width': 'full',
+                'label':  item.extension.excerpt.more ? item.extension.excerpt.more : 'Lees meer',
+                'url': item.content.url,
+                'extraClass': 'stretched-link'
+            }
+            %}
+        </div>
+    </figcaption>
+</figure>

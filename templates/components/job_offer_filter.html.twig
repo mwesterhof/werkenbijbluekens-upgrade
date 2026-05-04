@@ -1,0 +1,97 @@
+
+{# joboffer_overview_uuid from .env #}
+{% set joboffers =  sulu_content_load(joboffer_overview_uuid).content.joboffers %}
+
+
+{% set functionOptions = [] %}
+{% set locationOptions = [] %}
+
+{% for job in joboffers %}
+
+    {% if (job.template is defined and job.template == 'joboffer') and (job.function_profile is defined and job.function_profile|length > 0) %}
+
+        {% set function = sulu_content_load(job.function_profile) %}
+        {% if function.content.title not in functionOptions %}
+            {% set functionOptions = functionOptions|merge([ {  'title': function.content.title,
+                                                                'uuid':function.uuid
+                                                                }]) %}
+        {% endif %}
+
+        {% if job.locations is defined and job.locations|length  > 0 %}
+            {% for joblocation in job.locations %}
+        
+                {% set location = sulu_content_load(joblocation.uuid) %}
+                {% if location.content.city not in locationOptions %}
+                    {% set locationOptions = locationOptions|merge([ {  'city':location.content.city,
+                                                                        'uuid':location.uuid,
+                                                                        }]) %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+    {% endif %}
+
+
+{% endfor %}
+
+
+{% set selectedLocations = app.request.get('vestiging')|split(',') %}
+
+
+<div id="filter" class="container px-1 pt-6 pt-lg-4">
+    <div class="row">
+        {% if displayCount %}
+            <div class="col-lg-4">
+                <div class="mt-lg-1 pt-lg-3 text-center text-lg-left">
+                    <span class="text-secondary text-uppercase lead font-weight-bold">
+                        <span class="js-jobsnum">{{ joboffers|length }} vacature{{ joboffers|length != 1 ? 's' }} gevonden</span>
+                    </span>
+                </div>
+            </div>
+        {% endif %}
+        <div class="col {{ extraClass is defined ? extraClass }}">
+            <div class="border d-flex flex-column flex-lg-row justify-content-between p-2 p-lg-3">
+
+                <select id="functies" name="functies"
+                        class="selectpicker mr-lg-3 flex-grow-1"
+                        data-style="border-left-0 border-right-0 border-secondary border-top-0 border-w-2 text-secondary w-100 h-100 bg-white px-0"
+                        title='SELECTEER FUNCTIE'
+                        >
+                    {% for function in functionOptions|array_unique %}
+                        <option value="{{ function.uuid }}" {{ app.request.get('functie') == function.uuid ? 'selected' }}>{{ function.title }}</option>
+                    {% endfor %}
+                </select>
+
+                <select multiple id="locaties" name="locaties"
+                        data-selected-text-format="count>2"
+                        data-count-selected-text="{0} geselecteerd"
+                        title='SELECTEER LOCATIE(S)'
+                        class="selectpicker mr-lg-3 flex-grow-1"
+                        data-style="border-left-0 border-right-0 border-secondary border-top-0 border-w-2 text-secondary w-100 h-100 bg-white px-0"
+                        >
+                    {% for location in locationOptions|array_unique %}
+                        <option value="{{ location.uuid }}" {% if location.uuid in selectedLocations %} selected {% endif %} >{{ location.city }}</option>
+                    {% endfor %}
+                </select>
+
+                {%  include 'components/button-orange.html.twig'
+                    with {
+                    'label': buttonLabel,
+                    'extraClass': jsClass ~ ' font-brother ',
+                    'url':  '#'
+                }
+                %}
+                {% if offersLink is defined %}
+                    {%  include 'components/button-blue.html.twig'
+                        with {
+                        'label': 'Bekijk alle vacatures',
+                        'extraClass': 'ml-2 font-brother ',
+                        'url':  offersLink
+                    }
+                    %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+

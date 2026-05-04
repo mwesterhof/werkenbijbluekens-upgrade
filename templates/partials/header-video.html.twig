@@ -1,0 +1,15 @@
+<div class="max-width_1920 mx-auto position-relative">
+    <div class="embed-responsive embed-responsive-16by9" style="margin-top:-4%;">
+        <iframe id="video"
+                class="embed-responsive-item"
+                src="https://player.vimeo.com/video/{{ video }}"
+                frameborder="0" allow="autoplay; fullscreen" allowfullscreen>
+        </iframe>
+    </div>
+    <div class="position-absolute w-100 bottom-0 d-none d-md-flex align-items-end">
+        <div class="container-xl pb-3">
+            <h1 id="video-title" class="h2-lg text-white">{{ title|raw }}</h1>
+        </div>
+    </div>
+    <div class="position-absolute h-100 w-100 top-0" id="play-button"></div>
+</div>

@@ -1,0 +1,23 @@
+<figure class="position-relative h-100 d-flex flex-column">
+    {% for image in listitem.excerptImages %}
+        <img src="{{ image.formats['552x435'] }}" alt="{{ listitem.title }}" class="img-fluid">
+    {% endfor %}
+    <figcaption class="flex-grow-1 d-flex flex-column px-1 px-lg-3 py-3">
+        <h2 class="h5 mb-3">
+            {{ listitem.excerptTitle ? listitem.excerptTitle|raw : listitem.title|raw }}
+        </h2>
+        <div class="">
+            {{ listitem.excerptDescription|raw }}
+        </div>
+        <div class="mt-auto text-secondary">
+            {%  include 'components/button-orange-outline.html.twig'
+                with {
+                'width': 'full',
+                'label': listitem.excerptMore ? listitem.excerptMore : 'Lees meer',
+                'url': listitem.url,
+                'extraClass': 'stretched-link'
+            }
+            %}
+        </div>
+    </figcaption>
+</figure>

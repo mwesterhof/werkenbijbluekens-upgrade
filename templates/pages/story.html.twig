@@ -1,0 +1,64 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+
+{% if content.header_video|length > 0 and content.header_video !='null' %}
+    {% include 'partials/header-video.html.twig' with {
+        'video' : content.header_video,
+        'title' : 'Mijn verhaal<br>'~ content.name_person
+    } %}
+{% else %}
+    {% include 'partials/hero.html.twig' with {
+        'image' : content.header_image,
+        'title' : 'Mijn verhaal<br>'~ content.name_person
+    } %}
+{% endif %}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-7">
+
+            <div class="container">
+                <p class="h1 d-md-none">Mijn verhaal<br> {{ content.name_person|raw }}</p>
+                <p class="lead text-dark">{{ content.page_intro|striptags }}</p>
+            </div>
+
+            {% if extension.excerpt.title|length > 0 %}
+            <div class="container">
+                <h2 class="h4 py-3">
+                    {{ extension.excerpt.title|raw }}
+                </h2>
+            </div>
+            {% endif %}
+
+            {% for block in content.content_blocks %}
+                {% include "contentBlocks/#{block.type}.html.twig" with {
+                    content: block,
+                    view: view.content_blocks[loop.index0],
+                } only %}
+            {% endfor %}
+
+        </div>
+
+        <div class="col-md-5 col-lg-4 ml-lg-auto">
+
+            {% if content.function_profile|length > 0 %}
+                {% set profile = sulu_content_load(content.function_profile) %}
+                    {% include 'partials/sidebar_list-item-functiongroup.html.twig'
+                        with {
+                            'item': profile,
+                            'function_profile_title': content
+                        }
+                    %}
+            {% endif %}
+
+            {% include 'partials/share-this.html.twig' with {
+                'label' : 'Deel dit verhaal'
+            } %}
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

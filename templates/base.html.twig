@@ -5,52 +5,61 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.8.7/polyfill.min.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap">
+    <link rel="stylesheet" href="https://use.typekit.net/jhw5tml.css">
+
     {% block meta %}
-        {{ include('@SuluWebsite/Extension/seo.html.twig', {
-            seo: extension.seo|default([]),
-            content: content|default([]),
-            localizations: localizations|default([]),
-            shadowBaseLocale: shadowBaseLocale|default(),
-        }) }}
+        {% include "@SuluWebsite/Extension/seo.html.twig" with {
+            "seo": extension.seo|default([]),
+            "content": content|default([]),
+            "urls": urls|default([]),
+            "shadowBaseLocale": shadowBaseLocale|default(),
+            "defaultLocale": app.request.locale
+        } %}
     {% endblock %}
 
-    {% block style %}{% endblock %}
+    <meta property="og:title" content="{{ content.title }}" />
+    <meta property="og:description" content="{{ content.page_intro is defined ? content.page_intro|default('Werken bij Bluekens Truck en Bus B.V.')|striptags : content.content_blocks[0].block_text|default('Werken bij Bluekens Truck en Bus B.V.')|striptags }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{ app.request.uri }}" />
+    <meta property="og:image" content="{{ app.request.getSchemeAndHttpHost() }}{{ content.header_image[0].url|default }}" />
+
+    <meta name="facebook-domain-verification" content="tlx31cqy3r8kbrgey3dz6zqf4ek7fi" />
+
+    {% include 'partials/cookiebot/banner-script.html.twig' %}
+
+    {% include 'partials/seo/gtm_header.html.twig' %}
+    {% include 'partials/favicon.html.twig' %}
+
+    <link rel="canonical" href="{{ app.request.server.get('REQUEST_SCHEME') ~ '://' ~ app.request.server.get('HTTP_HOST') ~ urls.nl }}">
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('frontend') }}
+    {% endblock %}
+
 </head>
 <body>
-    <header>
-        {% block header %}
-            <nav>
-                <ul>
-                    <li>
-                        <a href="{{ sulu_content_root_path() }}">Homepage</a>
-                    </li>
 
-                    {% for item in sulu_navigation_root_tree('main') %}
-                        <li>
-                            <a href="{{ sulu_content_path(item.url, item.webspaceKey) }}"
-                               title="{{ item.title }}">{{ item.title }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </nav>
-        {% endblock %}
-    </header>
+    {% include 'partials/seo/gtm_body.html.twig' %}
 
-    <form action="{{ path('sulu_search.website_search') }}" method="GET">
-        <input name="q" type="text" placeholder="Search"/>
-        <input type="submit" value="Go"/>
-    </form>
+    <div id="page">
+        {% include 'partials/nav.html.twig' %}
 
-    <main>
-        {% block content %}{% endblock %}
-    </main>
+        <section id="content">
+            {% block content %}{% endblock %}
+        </section>
 
-    <footer>
-        {% block footer %}
-            <p>Copyright {{ 'now'|date('Y') }} SULU</p>
-        {% endblock %}
-    </footer>
+        <aside>
+            {% block aside %}{% endblock %}
+        </aside>
 
-    {% block javascripts %}{% endblock %}
+        {% include 'partials/footer.html.twig' %}
+    </div>
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('frontend') }}
+    {% endblock %}
 </body>
 </html>

@@ -1,0 +1,57 @@
+<div class="inline_stories_glide glide">
+    
+    <div class="glide__track" data-glide-el="track">
+        <div class="glide__slides">
+            {% for story in content.stories %}
+            <div class="item">
+                
+                    <div class="position-relative h-100">
+                        <div class="position-relative z1">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h2 class="text-white py-3 py-lg-5">
+                                            {{ story.excerptTitle }}
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5 bg-white py-3 py-lg-4 pr-lg-4 mb-5 position-relative">
+                                        {#  TODO: Fix this div visiblity
+                                            we actually need this <div> below to fake it is streching to the left,
+                                            but ... we do not want to show it in the carousel :-/
+                                        #}
+                                        {#
+                                        <div class="bg-white h-100 w-100 left-0 position-absolute top-0 ml_-100prct"></div>
+                                        #}
+                                        <div class="bg-white h-100 w-100 left-0 position-absolute top-0 ml_-100prct"></div>
+                                        <strong class="d-block font-weight-semibold mb-2 text-uppercase">
+                                            {{ story.namePerson|striptags }}
+                                        </strong>
+                                        {{ story.excerptDescription|raw }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="h-100 position-absolute top-0 w-100 left-0 right-0 max-width_1920 margin-auto">
+                            
+                            {% if story.headerImage|length > 0 %}
+                                <img src="{{ story.headerImage[0].formats['1920x1080'] }}" alt="" class="w-100 h-100 object-fit_cover">
+                            {% endif %}
+                            
+                        </div>
+                    </div>
+               
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {%  include 'components/carousel-controlls.html.twig'
+        with {
+            'items': content.stories,
+            'label': 'werknemers'
+    }
+    %}
+
+</div>

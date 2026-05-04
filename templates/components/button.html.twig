@@ -1,0 +1,161 @@
+{% set target = '_self' %}
+
+{% if button is defined %}
+    
+    {# set empty tagname, we use this for GTM/GA Tracking #}
+    {% set tag = '' %}
+    {% set btn_style = button.btn_style %}
+    {% set btn_label = button.btn_label %}
+    {% set btn_icon = button.btn_icon %}
+
+    {% if button.btn_media is defined and button.btn_media | length > 0 %}
+        {# get the first tag and use this #}
+        {% set media = sulu_resolve_media(button.btn_media, app.request.locale)%}
+        {% if media.tags|length > 0 %}
+            {% set tag = media.tags[0] %}
+        {% endif %}
+
+        {% set url = sulu_get_media_url(button.btn_media, 'inline') %}
+        {% set target = '_blank' %}
+        {% set rel = 'rel="noreferrer"' %}
+    {% elseif button.btn_url is defined and button.btn_url | length > 0 %}
+        {% set url = button.btn_url %}
+        {% set target = '_blank' %}
+        {% set rel = 'rel="noreferrer"' %}
+    {% elseif button.btn_anchor is defined and button.btn_anchor | length > 0 %}
+        {% set url = button.btn_anchor %}
+    {% elseif button.btn_phone is defined and button.btn_phone | length > 0 %}
+        {% set url = 'tel:'~button.btn_phone %}
+    {% elseif button.btn_email is defined and button.btn_email | length > 0 %}
+        {% set url = 'mailto:'~button.btn_email %}
+    {% elseif button.btn_form is defined and button.btn_form | length > 0 %}
+        {% set url = '#' %}
+        {% set dataToggle = 'modal' %}
+        {% set dataTarget = '#modal_' ~ button.btn_form.vars.id %}
+    {% elseif button.btn_article is defined and button.btn_article | length > 0 %}
+        {% set url = button.btn_article.routePath %}
+    {% elseif button.type == 'automation_button' and button.automation | length > 0 %}
+    
+        {# we use the unique id's for this specific automation to make sure we do not include the same automation (and form) multiple times #}
+        {% set uniqueautomationname = button.automation[0].deal_pipeline_id ~ '_' ~ button.automation[0].deal_stage_id ~ '_' ~ button.automation[0].deal_owner_id  ~ '_' ~ button.automation[0].unique_tag %}
+   
+        {% set renderThisButton = true %}
+        {% set randomNumber = random() %}
+        {% set dataToggle = 'modal' %}
+        {% set dataTarget = '#modal-'~uniqueautomationname %}
+        {# modal redered here: templates/components/button-modals.html.twig #}
+        {% set dataGTMlabel = button.btn_label|url_encode %}
+    {% else %}
+        {% if button.btn_page is defined and button.btn_page|length > 0 %}
+            {% set link = sulu_content_load(button.btn_page) %}
+            {% if link.content is defined %}
+                {% set url = link.content.url %}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+
+    {# build icons #}
+    {% set buttonPosition = '' %}
+    {% if btn_icon|length > 0 %}
+        {% if btn_icon ends with '-right' %}
+            {% set buttonPosition = 'right' %}
+        {% elseif btn_icon ends with '-left' %}
+            {% set buttonPosition = 'left' %}
+        {% endif %}
+    {% endif %}
+
+    {% if btn_style == 'btn-brand-grey' %}
+        {% set btn_style = '' %}
+        {% set btn_classes = 'bg-light d-flex fs-6 fs-xxl-5 fw-light justify-content-between mb-3 p-2 text-dark text-decoration-none' %}
+    {% endif %}
+
+    {% if btn_style == 'btn-dark-textlink' %}
+        {% set btn_style = '' %}
+        {% set btn_classes = 'text-dark fw-demi' %}
+    {% endif %}
+
+    {% if btn_style == 'btn-white-textlink' %}
+        {% set btn_style = '' %}
+        {% set btn_classes = 'text-white fw-demi' %}
+    {% endif %}
+
+    {% if btn_style == 'btn-primary-textlink' %}
+        {% set btn_style = '' %}
+        {% set btn_classes = 'btn-primary-textlink' %}
+    {% endif %}
+
+    {% if btn_style == 'square-cta-label' %}
+        {% set btn_style = '' %}
+        {% set btn_classes = 'align-items-center align-self-start border border-2 border-primary d-flex fw-demi h-100 px-4 px-xxl-4 text-decoration-none text-primary text-uppercase' %}
+    {% endif %}
+
+    {% if btn_style == 'square-cta-button' %}
+        {% set btn_label = '' %}
+        {% set btn_style = '' %}
+        {% set buttonPosition = 'center' %}
+        {% set btn_classes = 'align-self-start bg-primary border border-2 border-primary p-3 text-white' %}
+    {% endif %}
+
+    {% if btn_style == 'square-cta-spacer' %}
+        {% set btn_style = '' %}
+        {% set btn_classes = 'cta_buttonspacer' %}
+    {% endif %}
+
+    {% if btn_style == 'btn-orange-arrow' %}
+        {% set btn_style = '' %}
+        
+        {% set arrow %}
+            <svg class="ml-2" xmlns="http://www.w3.org/2000/svg" width="33.978" height="14.382" viewBox="0 0 33.978 14.382"><path d="M285.321,75.983a1.039,1.039,0,0,0-.012-.124.95.95,0,0,0-.021-.13c-.012-.04-.029-.078-.045-.117s-.022-.068-.039-.1a.234.234,0,0,0-.019-.025c0-.008-.006-.017-.011-.025l-2.133-3.38,0,0-.644-1.021,0,0-1.145-1.814a.978.978,0,0,0-1.654,1.043h0l2.019,3.2.005,0,.954,1.513H266.264a.106.106,0,0,0-.019.005H252.321a.979.979,0,0,0,0,1.957H282.57l-.954,1.512-.005,0-2.019,3.2h0a.978.978,0,1,0,1.654,1.044l1.145-1.814,0,0,.644-1.02h0l2.133-3.38a.192.192,0,0,0,.011-.025c.006-.009.014-.015.019-.024.017-.032.025-.067.039-.1s.033-.077.045-.117a.964.964,0,0,0,.021-.131,1.02,1.02,0,0,0,.012-.124v-.006Z" transform="translate(-251.343 -68.795)" fill="currentColor"/></svg>
+        {% endset %}
+        
+        {% set btn_classes = 'align-items-center border border-secondary font-weight-bold font-size-btn hover-bg-to-secondary hover-txt-to-white justify-content-between no-deco px-2 py-0_5 text-secondary text-uppercase' %}
+    {% endif %}
+
+
+{% else %}
+    {% set btn_width = false %}
+    {% if  btn_width is defined %}
+        {% set btn_width = btn_width %}
+    {% endif %}
+{% endif %}
+
+{% apply spaceless %}
+<a data-gtm-label="{{ tag|default }}" {# GTM Tracking label #}
+    href="{{ url|default('#') }}"
+    class="{{ btn_classes|default(' btn animated-hover ') }}
+    {{ btn_style|default }}
+    {{ extraClass|default }}"
+    {{ dataToggle is defined and dataToggle != '' ? 'data-bs-toggle='~dataToggle~'' }}
+    {{ dataTarget is defined and dataTarget != '' ? 'data-bs-target='~dataTarget~'' }}
+    target="{{ target }}"
+    title="{{ btn_label|striptags|default }}" {{ rel|default }}
+    >
+
+        {% if buttonPosition == 'left' %}
+            <span>
+                {% include "svg/"~ btn_icon|replace({'-left': ''})~".svg.twig" %}
+            </span>
+        {% endif %}
+
+        <span class="{{ buttonPosition == 'left' ? 'ps-2' }} {{ buttonPosition == 'right' ? 'pe-2' }} ">
+            {{- btn_label|default|raw -}} 
+        </span>
+
+        {% if buttonPosition == 'right' %}
+            <span>
+                {% include "svg/"~ btn_icon|replace({'-right': ''})~".svg.twig" %}
+            </span>
+        {% endif %}
+
+        {% if buttonPosition == 'center' %}
+            <span>
+                {% include "svg/"~ btn_icon|replace({'-left': ''})~".svg.twig" %}
+            </span>
+        {% endif %}
+
+        {% if arrow is defined  %}
+            {{ arrow }}
+        {% endif %}
+
+</a>
+{% endapply %}

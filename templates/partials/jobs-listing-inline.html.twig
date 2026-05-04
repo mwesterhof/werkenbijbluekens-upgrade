@@ -1,0 +1,67 @@
+{% if jobs is defined and jobs is not empty %}
+    <div class="margin-auto max-width_1920 bg-light py-md-5 py-5 py-lg-6">
+        <div class="container-xl">
+            {% if title is defined and title|length > 0 %}
+            <div class="row">
+                <div class="col-12">
+                    <div class="font-weight-bold line-height-1_2 my-1 text-4xl text-dark">
+                        {{ title|raw }}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            <div class="d-grid gridcolumns-1 gridcolumns-md-2 gridcolumns-lg-3 grid-column-gap-50 grid-column-gap-lg-100 grid-column-gap-xxl-175">
+                {% for job in jobs %}
+                    <div class="d-flex flex-column mb-4 position-relative" style="word-break: break-word;">
+
+                        <span class="d-flex flex-column flex-grow-1 font-source-sans-pro font-weight-bold justify-content-end small text-black-50 text-uppercase">
+                            {% if job.number_of_hours is defined %}
+                                {{ job.number_of_hours }} uur -
+                            {% endif %}
+
+                            {% if job.location is defined %}
+                                {% set location = sulu_content_load(job.location) %}
+                                {% if location.content.city|length > 0 %}
+                                    {{ location.content.city }}
+                                {% endif %}
+                            {% endif %}
+                        </span>
+
+                        <h2 class="line-height-1_2 text-2xl text-dark text-lg-3xl">
+                            {{ job.excerptTitle }}
+                        </h2>
+
+                        <img src="{{ job.excerptImages[0].formats['552x435'] }}" alt="{{ job.excerptTitle }}" class="img-fluid">
+
+                        {%  include 'components/button-orange-outline.html.twig'
+                            with {
+                                'width': 'full',
+                                'label': 'Bekijk de vacature',
+                                'url': job.url,
+                                'extraClass': 'mt-3 stretched-link'
+                            }
+                        %}
+
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row">
+
+                {% if alljobs_link is defined and alljobs_link|length > 0 %}
+                    {% set page = sulu_content_load(alljobs_link) %}
+            
+                    <div class="col-12 text-right">
+                        {%  include 'components/button-blue.html.twig'
+                            with {
+                                'label': content.alljobs_linklabel|default('Bekijk alle vacatures'),
+                                'url' : page.content.url|default('/vacatures'),
+                                'extraClass': 'mt-3'
+                            }
+                        %}
+                    </div>
+                    
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}

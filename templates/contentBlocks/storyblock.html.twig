@@ -1,0 +1,57 @@
+{% set story = sulu_content_load(content.story, {
+    'title': 'title',
+    'excerptImages': 'excerpt.images',
+    'excerptTitle': 'excerpt.title',
+    'excerptDescription': 'excerpt.description',
+    'excerptMore': 'excerpt.more',
+    'url': 'url',
+}) %}
+
+<div class="bg-white p-2 py-md-5 h-100 margin-auto max-width_1920">
+    <div class="row">
+        <div class="title col-12 col-md-1 text-md-nowrap justify-content-center align-items-center d-none d-lg-flex">
+            <p class="mb-2 mb-md-0 font-weight-regular text-md-vertical text-3xl">{{ content.title|raw }}</p>
+        </div>
+        <div class="image col-12 col-md-5 position-relative">
+            <div style="--aspect-ratio:1.4/1">
+                {% for image in story.extension.excerpt.images %}
+                    <img src="{{ image.formats['1120x800'] }}" alt="" class="h-100 w-100 object-fit_cover">
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 d-flex flex-column justify-content-center pl-md-5">
+            <div class="font-weight-bold line-height-1_2 my-1 mt-md-0 text-3xl text-lg-4xl">
+                {{ story.extension.excerpt.title|raw }}
+            </div>
+            <div class="font-weight-bold my-1 text-base text-black-50 text-uppercase">
+                {{ story.content.title|raw }}
+            </div>
+            <div class="mb-1">
+                {{ story.extension.excerpt.description|raw }}
+            </div>
+
+            <div class="align-items-start d-flex flex-column flex-xl-row">
+                {%  include 'components/button-orange-outline.html.twig'
+                    with {
+                        'label': story.extension.excerpt.more ? story.extension.excerpt.more : 'Lees meer',
+                        'url':  story.content.url,
+                        'extraClass': 'mr-2 mb-2'
+                }
+                %}
+
+                {% if content.allstories_link is defined and content.allstories_link|length > 0 %}
+                    {% set page = sulu_content_load(content.allstories_link) %}
+        
+                    {%  include 'components/button-orange.html.twig'
+                        with {
+                            'label': 'Lees alle ervaringen',
+                            'url':  page.content.url
+                    }
+                    %}
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>

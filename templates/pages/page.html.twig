@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+
+    {%  include 'partials/hero.html.twig'
+        with {
+            'image' : content.header_image,
+            'title' : content.title
+        }
+    %}
+
+    {% if content.page_intro| length > 0 %}
+    
+    <div class="container pt-5 mb-3">
+        <div class="row">
+            <div class="col-md-7">
+                <p class="lead text-dark">{{ content.page_intro|striptags }}</p>
+            </div>
+        </div>
+    </div>
+
+    {% endif %}
+
+    {% for block in content.content_blocks %}
+        {% include "contentBlocks/#{block.type}.html.twig" with {
+            content: block,
+            view: view.content_blocks[loop.index0],
+        } only %}
+    {% endfor %}
+
+    {% if content.function_profiles| length > 0 %}
+        {%  include 'components/function_profile_carousel.html.twig'
+            with {
+                'profiles': content.function_profiles
+            }
+        %}
+    {% endif %}
+
+    {% if content.joboffers| length > 0 %}
+        {%  include 'partials/jobs-listing-inline.html.twig'
+            with {
+                'jobs': content.joboffers
+            }
+        %}
+    {% endif %}
+
+    {%  include 'partials/application.html.twig'
+        with {
+            'label': 'Keertje kennismaken of meer informatie?'
+        }
+    %}
+
+{% endblock %}

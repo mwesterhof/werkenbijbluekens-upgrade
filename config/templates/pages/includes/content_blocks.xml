@@ -1,0 +1,682 @@
+<?xml version="1.0" ?>
+<properties xmlns="http://schemas.sulu.io/template/template"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:xi="http://www.w3.org/2001/XInclude"
+            xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/properties-1.0.xsd">
+
+    <block name="content_blocks" default-type="text_with_image">
+        <meta>
+            <title lang="nl">Content blokken</title>
+            <title lang="en">Content blocks</title>
+        </meta>
+
+        <types>
+            <type name="two_column_block">
+                <meta>
+                    <title lang="nl">Twee kolommen</title>
+                    <title lang="en">Two columns</title>
+                </meta>
+                <properties>
+                    <property name="left_block_title" type="text_line">
+                        <meta>
+                            <title lang="nl">Titel block links</title>
+                        </meta>
+                    </property>
+                    <property name="left_block_text" type="text_editor">
+                        <meta>
+                            <title lang="nl">Tekst block links</title>
+                            <title lang="en">Text block left</title>
+                        </meta>
+                    </property>
+
+                    <block name="buttons_left" default-type="page_button">
+                        <meta>
+                            <title>Buttons</title>
+                        </meta>
+                        <types>
+                            <type name="page_button">
+                                <meta>
+                                    <title>Button naar andere pagina</title>
+                                </meta>
+                                <properties>
+                                    <property name="btn_page" type="single_page_selection" colspan="4">
+                                        <meta>
+                                            <title>Pagina link</title>
+                                        </meta>
+                                    </property>
+                                    <property name="btn_label" type="text_line" colspan="4">
+                                        <meta>
+                                            <title>Button label</title>
+                                        </meta>
+                                    </property>
+                                    <xi:include href="./button_styles.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                                        xpointer(/sulu:properties/sulu:property)" />
+                                    <xi:include href="./button_icons.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                                        xpointer(/sulu:properties/sulu:property)" />
+                                </properties>
+                            </type>
+                            <type name="media_button">
+                                <meta>
+                                    <title>Button naar download</title>
+                                </meta>
+                                <properties>
+                                    <property name="btn_media" type="single_media_selection" colspan="4">
+                                        <meta>
+                                            <title>Media link</title>
+                                        </meta>
+                                    </property>
+                                    <property name="btn_label" type="text_line" colspan="4">
+                                        <meta>
+                                            <title>Button label</title>
+                                        </meta>
+                                    </property>
+                                    <xi:include href="./button_styles.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                                        xpointer(/sulu:properties/sulu:property)" />
+                                    <xi:include href="./button_icons.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                                        xpointer(/sulu:properties/sulu:property)" />
+                                </properties>
+                            </type>
+                            <type name="url_button">
+                                <meta>
+                                    <title>Button naar externe url</title>
+                                </meta>
+                                <properties>
+                                    <property name="btn_url" type="url" colspan="4">
+                                        <meta>
+                                            <title>Media link</title>
+                                        </meta>
+                                    </property>
+                                    <property name="btn_label" type="text_line" colspan="4">
+                                        <meta>
+                                            <title>Button label</title>
+                                        </meta>
+                                    </property>
+                                    <xi:include href="./button_styles.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                                        xpointer(/sulu:properties/sulu:property)" />
+                                    <xi:include href="./button_icons.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                                        xpointer(/sulu:properties/sulu:property)" />
+                                </properties>
+                            </type>
+                            <type name="anchor_button">
+                                <meta>
+                                    <title>Anker op deze pagina</title>
+                                </meta>
+                                <properties>
+                                    <property name="btn_anchor" type="text_line">
+                                        <meta>
+                                            <title>Ankernaam</title>
+                                        </meta>
+                                    </property>
+                                    <property name="btn_label" type="text_line" colspan="4">
+                                        <meta>
+                                            <title>Button label</title>
+                                        </meta>
+                                    </property>
+                                    <xi:include href="./button_styles.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                                        xpointer(/sulu:properties/sulu:property)" />
+                                    <xi:include href="./button_icons.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                                        xpointer(/sulu:properties/sulu:property)" />
+                                </properties>
+                            </type>
+                            <type name="email_button">
+                                <meta>
+                                    <title>E-mail link</title>
+                                </meta>
+                                <properties>
+                                    <property name="btn_email" type="email">
+                                        <meta>
+                                            <title>E-mailadres</title>
+                                        </meta>
+                                    </property>
+                                    <property name="btn_label" type="text_line" colspan="4">
+                                        <meta>
+                                            <title>Button label</title>
+                                        </meta>
+                                    </property>
+                                    <xi:include href="./button_styles.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                                        xpointer(/sulu:properties/sulu:property)" />
+                                    <xi:include href="./button_icons.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                                        xpointer(/sulu:properties/sulu:property)" />
+                                </properties>
+                            </type>
+                            <type name="phone_button">
+                                <meta>
+                                    <title>Telefoon link</title>
+                                </meta>
+                                <properties>
+                                    <property name="btn_phone" type="phone">
+                                        <meta>
+                                            <title>Telefoonnummer</title>
+                                        </meta>
+                                    </property>
+                                    <property name="btn_label" type="text_line" colspan="4">
+                                        <meta>
+                                            <title>Button label</title>
+                                        </meta>
+                                    </property>
+                                    <xi:include href="./button_styles.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                                        xpointer(/sulu:properties/sulu:property)" />
+                                    <xi:include href="./button_icons.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                                        xpointer(/sulu:properties/sulu:property)" />
+                                </properties>
+                            </type>
+                            <type name="form_button">
+                                <meta>
+                                    <title>Formulier pop-up</title>
+                                </meta>
+                                <properties>
+                                    <property name="btn_form" type="single_form_selection" colspan="12">
+                                        <meta>
+                                            <title>Formulier</title>
+                                        </meta>
+                                        <params>
+                                            <param name="resourceKey" value="page"/>
+                                        </params>
+                                    </property>
+                                    <property name="btn_label" type="text_line" colspan="6">
+                                        <meta>
+                                            <title>Button label</title>
+                                        </meta>
+                                    </property>
+                                    <property name="form_title" type="text_line" colspan="12">
+                                        <meta>
+                                            <title>Formulier titel</title>
+                                        </meta>
+                                    </property>
+                                    <property name="form_intro" type="text_area" colspan="12">
+                                        <meta>
+                                            <title>Formulier introtekst</title>
+                                        </meta>
+                                    </property>
+                                    <xi:include href="./button_styles.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                                        xpointer(/sulu:properties/sulu:property)" />
+                                    <xi:include href="./button_icons.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                                        xpointer(/sulu:properties/sulu:property)" />
+                                </properties>
+                            </type>
+                            <type name="article_button">
+                                <meta>
+                                    <title>Button naar 'Article''</title>
+                                </meta>
+                                <properties>
+                                    <property name="btn_article" type="single_article_selection" colspan="4">
+                                        <meta>
+                                            <title>Artikel link</title>
+                                        </meta>
+                                    </property>
+                                    <property name="btn_label" type="text_line" colspan="4">
+                                        <meta>
+                                            <title>Button label</title>
+                                        </meta>
+                                    </property>
+                                    <xi:include href="./button_styles.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                                        xpointer(/sulu:properties/sulu:property)" />
+                                    <xi:include href="./button_icons.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                                        xpointer(/sulu:properties/sulu:property)" />
+                                </properties>
+                            </type>
+                            <type name="automation_button">
+                                <meta>
+                                    <title>E-mailwall button</title>
+                                </meta>
+                                <properties>
+                                    <property name="automation" type="snippet_selection">
+                                        <meta>
+                                            <title>E-mailwall</title>
+                                        </meta>
+                                        <params>
+                                            <param name="types" value="automation"/>
+                                        </params>
+                                    </property>
+                                    <property name="btn_label" type="text_line" colspan="12">
+                                        <meta>
+                                            <title>Button label</title>
+                                        </meta>
+                                    </property>
+                                    <xi:include href="./button_styles.xml"
+                                                xpointer="xmlns(sulu=http://schemas.sulu.io/template/template) xpointer(/sulu:properties/sulu:property)" />
+                                    <xi:include href="./button_icons.xml"
+                                                xpointer="xmlns(sulu=http://schemas.sulu.io/template/template) xpointer(/sulu:properties/sulu:property)" />
+                                </properties>
+                            </type>
+                        </types>
+                    </block>
+
+                    <property name="right_block_title" type="text_line">
+                        <meta>
+                            <title lang="nl">Titel block rechts</title>
+                        </meta>
+                    </property>
+                    <property name="right_block_text" type="text_editor">
+                        <meta>
+                            <title lang="nl">Tekst block rects</title>
+                            <title lang="en">Text block right</title>
+                        </meta>
+                    </property>
+                    
+                    <xi:include href="button_types.xml"
+                                xpointer="xmlns(sulu=http://schemas.sulu.io/template/template) xpointer(/sulu:properties/*)" />
+                </properties>
+            </type>
+
+            <type name="text_with_image">
+                <meta>
+                    <title lang="nl">Tekst met afbeelding</title>
+                    <title lang="en">Tekst met afbeelding</title>
+                </meta>
+                <properties>
+                    <property name="block_title" type="text_line">
+                        <meta>
+                            <title lang="nl">Titel</title>
+                        </meta>
+                    </property>
+                    <property name="block_text" type="text_editor">
+                        <meta>
+                            <title lang="nl">Tekst</title>
+                            <title lang="en">Text</title>
+                        </meta>
+                    </property>
+                    <property name="block_image" type="media_selection" colspan="6">
+                        <meta>
+                            <title lang="nl">Afbeelding</title>
+                            <title lang="en">Image</title>
+                        </meta>
+                    </property>
+                    <property name="block_image_position" type="single_select" colspan="6">
+                        <meta>
+                            <title lang="nl">Afbeelding positie</title>
+                            <title lang="en">Image position</title>
+                        </meta>
+
+                        <params>
+                            <param name="default_value" value="afbeelding_links"/>
+
+                            <param name="values" type="collection">
+                                <param name="afbeelding_links">
+                                    <meta>
+                                        <title lang="nl">Links</title>
+                                        <title lang="en">Left</title>
+                                    </meta>
+                                </param>
+
+                                <param name="afbeelding_rechts">
+                                    <meta>
+                                        <title lang="nl">Rechts</title>
+                                        <title lang="en">Right</title>
+                                    </meta>
+                                </param>
+                            </param>
+                        </params>
+                    </property>
+
+                    <xi:include href="button_types.xml"
+                                xpointer="xmlns(sulu=http://schemas.sulu.io/template/template) xpointer(/sulu:properties/*)" />
+
+                    <property name="block_button_label" type="text_line" colspan="6">
+                        <meta>
+                            <title lang="nl">Button / link label</title>
+                        </meta>
+                    </property>
+
+                    <property name="block_button_link" type="single_page_selection" colspan="6">
+                        <meta>
+                            <title lang="nl">Button link</title>
+                        </meta>
+                    </property>
+
+                </properties>
+            </type>
+
+            <type name="large_image_with_textblock">
+                <meta>
+                    <title lang="nl">Grote afbeelding met tekstblokje</title>
+                </meta>
+                <properties>
+                    <property name="block_title" type="text_line">
+                        <meta>
+                            <title lang="nl">Titel</title>
+                        </meta>
+                    </property>
+                   <property name="block_text" type="text_editor">
+                        <meta>
+                            <title lang="nl">Tekst</title>
+                            <title lang="en">Text</title>
+                        </meta>
+                    </property>
+
+                    <property name="text_position" type="single_select" colspan="6">
+                        <meta>
+                            <title>Tekstpositie</title>
+                        </meta>
+
+                        <params>
+                            <param name="default_value" value="links"/>
+
+                            <param name="values" type="collection">
+                                <param name="links">
+                                    <meta>
+                                        <title>Links</title>
+                                    </meta>
+                                </param>
+
+                                <param name="rechts">
+                                    <meta>
+                                        <title>Rechts</title>
+                                    </meta>
+                                </param>
+                            </param>
+                        </params>
+                    </property>
+
+                    <property name="block_image" type="media_selection">
+                        <meta>
+                            <title lang="nl">Afbeelding</title>
+                            <title lang="en">Image</title>
+                        </meta>
+                    </property>
+
+                    <xi:include href="button_types.xml"
+                                xpointer="xmlns(sulu=http://schemas.sulu.io/template/template) xpointer(/sulu:properties/*)" />
+                                                    
+                    <property name="block_button_label" type="text_line" colspan="6">
+                        <meta>
+                            <title lang="nl">Button / link label</title>
+                        </meta>
+                    </property>
+                    <property name="block_button_link" type="single_page_selection" colspan="6">
+                        <meta>
+                            <title lang="nl">Button link</title>
+                        </meta>
+                    </property>
+                </properties>
+            </type>
+
+            <type name="storyblock">
+                <meta>
+                    <title>Verhaal blok</title>
+                </meta>
+                <properties>
+                    <property name="title" type="text_line">
+                        <meta>
+                            <title>Titel</title>
+                        </meta>
+                    </property>
+                    <property name="story" type="single_page_selection" colspan="6">
+                        <meta>
+                            <title>Verhaal</title>
+                        </meta>
+                    </property>
+                    <property name="allstories_link" type="single_page_selection" colspan="6">
+                        <meta>
+                            <title>Alle verhalen link</title>
+                        </meta>
+                    </property>
+                </properties>
+            </type>
+
+            <type name="textblock">
+                <meta>
+                    <title lang="nl">Tekstblok</title>
+                </meta>
+                <properties>
+                    <property name="block_title" type="text_line">
+                        <meta>
+                            <title lang="nl">Titel</title>
+                        </meta>
+                    </property>
+                    <property name="block_text" type="text_editor">
+                        <meta>
+                            <title lang="nl">Tekst</title>
+                        </meta>
+                    </property>
+                </properties>
+            </type>
+
+            <type name="summary">
+                <meta>
+                    <title lang="nl">Opsomming</title>
+                </meta>
+                <properties>
+                    <property name="block_title" type="text_line">
+                        <meta>
+                            <title lang="nl">Titel</title>
+                        </meta>
+                    </property>
+                    <property name="block_text" type="text_editor">
+                        <meta>
+                            <title lang="nl">Tekst</title>
+                        </meta>
+                    </property>
+                    <property name="color" type="single_select" colspan="6">
+                        <meta>
+                            <title>Kleur</title>
+                        </meta>
+
+                        <params>
+                            <param name="default_value" value="primmary"/>
+
+                            <param name="values" type="collection">
+                                <param name="primary">
+                                    <meta>
+                                        <title>Blauw</title>
+                                    </meta>
+                                </param>
+
+                                <param name="secondary">
+                                    <meta>
+                                        <title>Oranje</title>
+                                    </meta>
+                                </param>
+                            </param>
+                        </params>
+                    </property>
+                </properties>
+            </type>
+
+            <type name="inline_stories_carousel">
+                <meta>
+                    <title lang="nl">Verhalen carousel</title>
+                    <title lang="en">Stories carousel</title>
+                </meta>
+                <properties>
+                    <property name="stories" type="smart_content">
+                        <meta>
+                            <title lang="nl">Verhalen</title>
+                            <title lang="en">Stories</title>
+                            <info_text lang="nl">
+                                Selecteer één of meerdere verhalen van werknemers. Wordt o.a. gebruikt op de 'Vestigingen' pagina.
+                            </info_text>
+                        </meta>
+                        <params>
+                            <param name="provider" value="pages"/>
+                            <param name="max_per_page" value="5"/>
+                            <param name="page_parameter" value="p"/>
+                            <param name="properties" type="collection">
+                                <param name="article" value="article"/>
+                                <param name="headerImage" value="header_image"/>
+                                <param name="namePerson" value="name_person"/>
+                                <param name="excerptTitle" value="excerpt.title"/>
+                                <param name="excerptTags" value="excerpt.tags"/>
+                                <param name="excerptImages" value="excerpt.images"/>
+                                <param name="excerptDescription" value="excerpt.description"/>
+                            </param>
+                        </params>
+                    </property>
+                </properties>
+            </type>
+
+            <type name="inline_pages_carousel">
+                <meta>
+                    <title lang="nl">Pagina carousel</title>
+                    <title lang="en">Pagina carousel</title>
+                </meta>
+                <properties>
+                    <property name="page_carousel" type="smart_content">
+                        <meta>
+                            <title lang="nl">Paginas</title>
+                            <title lang="en">Pages</title>
+                            <info_text lang="nl">
+                                Selecteer één of meerdere pagina's voor carousel weergave.
+                            </info_text>
+                        </meta>
+                        <params>
+                            <param name="provider" value="pages"/>
+                            <param name="max_per_page" value="10"/>
+                            <param name="page_parameter" value="p"/>
+                            <param name="properties" type="collection">
+                                <param name="article" value="article"/>
+                                <param name="headerImage" value="header_image"/>
+                                <param name="namePerson" value="name_person"/>
+                                <param name="excerptTitle" value="excerpt.title"/>
+                                <param name="excerptTags" value="excerpt.tags"/>
+                                <param name="excerptImages" value="excerpt.images"/>
+                                <param name="excerptDescription" value="excerpt.description"/>
+                            </param>
+                        </params>
+                    </property>
+                    <property name="hide_readmore_link" type="checkbox">
+                        <meta>
+                            <title lang="nl">Verberg 'Lees meer' knop</title>
+                            <title lang="en">Hide 'Read more' button</title>
+                        </meta>
+                    </property>
+                    <property name="hide_sidelabel" type="checkbox">
+                        <meta>
+                            <title lang="nl">Verberg vertikaal zij-label</title>
+                            <title lang="en">Hide vertical side label</title>
+                        </meta>
+                    </property>
+                </properties>
+            </type>
+
+            <type name="jobalert">
+                <meta>
+                    <title>Jobalert</title>
+                </meta>
+                <properties>
+                
+                    <property name="title" type="text_line">
+                        <meta>
+                            <title>Titel</title>
+                        </meta>
+                    </property>
+
+                    <property name="text" type="text_area">
+                        <meta>
+                            <title>Tekst</title>
+                        </meta>
+                    </property>
+
+                    <property name="form" type="single_form_selection">
+                        <meta>
+                            <title lang="nl">Formulier</title>
+                        </meta>
+
+                        <params>
+                            <param name="resourceKey" value="page" />
+                        </params>
+                    </property>
+
+                </properties>
+
+            </type>
+
+            <type name="function_teaser">
+                <meta>
+                    <title>Functie-teasers</title>
+                </meta>
+                <properties>
+                    <property name="title" type="text_line">
+                        <meta>
+                            <title>Titel</title>
+                        </meta>
+                    </property>
+                    <property name="text" type="text_area">
+                        <meta>
+                            <title>Tekst</title>
+                        </meta>
+                    </property>
+                    <property name="pages" type="page_selection">
+                        <meta>
+                            <title>Teasers</title>
+                        </meta>
+                        <params>
+                            <param name="properties" type="collection">
+                                <param name="title" value="title"/>
+                                <param name="article" value="article"/>
+                                <param name="excerptTitle" value="excerpt.title"/>
+                                <param name="excerptDescription" value="excerpt.description"/>
+                                <param name="excerptImages" value="excerpt.images"/>
+                            </param>
+                        </params>
+                    </property>
+                </properties>
+            </type>
+
+            <type name="jobs_teaser">
+                <meta>
+                    <title>Vacature-teasers</title>
+                </meta>
+                <properties>
+                    <property name="title" type="text_line">
+                        <meta>
+                            <title lang="nl">Titel</title>
+                            <title lang="en">Title</title>
+                        </meta>
+                    </property>
+                    <property name="joboffers" type="smart_content">
+                        <meta>
+                            <title lang="nl">Vacatures</title>
+                        </meta>
+                        <params>
+                            <param name="provider" value="pages"/>
+                            <param name="page_parameter" value="p"/>
+                            <param name="properties" type="collection">
+                                <param name="article" value="article"/>
+                                <param name="number_of_hours" value="number_of_hours"/>
+                                <param name="location" value="location"/>
+                                <param name="excerptTitle" value="excerpt.title"/>
+                                <param name="excerptTags" value="excerpt.tags"/>
+                                <param name="excerptImages" value="excerpt.images"/>
+                                <param name="excerptDescription" value="excerpt.description"/>
+                            </param>
+                        </params>
+                    </property>
+                    <property name="nojobs_text" type="text_editor">
+                        <meta>
+                            <title lang="nl">Tekst bij geen vacatures</title>
+                            <title lang="en">No jobs text</title>
+                        </meta>
+                    </property>
+                    <property name="alljobs_link" type="single_page_selection" colspan="6">
+                        <meta>
+                            <title>Alle vacatures link</title>
+                        </meta>
+                    </property>
+                    <property name="alljobs_linklabel" type="text_line" colspan="6">
+                        <meta>
+                            <title lang="nl">Alle vacatures link-label</title>
+                            <title lang="en">All jobs link label</title>
+                        </meta>
+                    </property>
+                </properties>
+            </type>
+
+            <type name="anchor">
+                <meta>
+                    <title>Anker</title>
+                </meta>
+                <properties>
+                    <property name="anchor_name" type="text_line">
+                        <meta>
+                            <title>Ankerlink titel</title>
+                        </meta>
+                    </property>
+                </properties>
+            </type>
+
+        </types>
+
+    </block>
+
+</properties>

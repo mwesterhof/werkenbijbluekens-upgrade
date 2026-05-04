@@ -1,0 +1,178 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+
+    <key>joboffer</key>
+
+    <view>pages/joboffer</view>
+    <controller>Sulu\Bundle\WebsiteBundle\Controller\DefaultController::indexAction</controller>
+
+    <cacheLifetime>86400</cacheLifetime>
+
+    <meta>
+        <title lang="nl">Vacature</title>
+    </meta>
+
+    <properties>
+
+        <xi:include href="includes/header.xml"
+                    xpointer="xmlns(sulu=http://schemas.sulu.io/template/template) xpointer(/sulu:properties/*)" />
+
+        <xi:include href="includes/resource_locator.xml"
+                    xpointer="xmlns(sulu=http://schemas.sulu.io/template/template) xpointer(/sulu:properties/*)" />
+
+        <property name="slogan" type="text_line">
+            <meta>
+                <title lang="nl">Slogan</title>
+            </meta>
+        </property>
+
+        <property name="page_intro" type="text_area">
+            <meta>
+                <title lang="nl">Intro</title>
+            </meta>
+        </property>
+
+        <xi:include href="includes/content_blocks.xml"
+                    xpointer="xmlns(sulu=http://schemas.sulu.io/template/template) xpointer(/sulu:properties/*)"/>
+
+        <property name="fulltime" type="checkbox">
+            <meta>
+                <title lang="nl">Fulltime</title>
+            </meta>
+        </property>
+
+        <property name="summary" type="checkbox">
+            <meta>
+                <title lang="nl">Toon 'in het kort' blokje</title>
+            </meta>
+        </property>
+
+        <property name="number_of_hours" type="text_line">
+            <meta>
+                <title lang="nl">Aantal uren</title>
+            </meta>
+        </property>
+
+        <property name="location" type="single_page_selection">
+            <meta>
+                <title lang="nl">Locatie</title>
+            </meta>
+        </property>
+
+        <property name="locations" type="page_selection">
+            <meta>
+                <title lang="nl">Locaties</title>
+            </meta>
+        </property>
+
+        <property name="function_profile" type="single_page_selection">
+            <meta>
+                <title lang="nl">Functie profiel</title>
+            </meta>
+        </property>
+
+        <property name="salary_min" type="number">
+            <meta>
+                <title lang="nl">Salaris minimum</title>
+            </meta>
+            <params>
+                <param name="min" value="0"/>
+            </params>
+        </property>
+
+        <property name="salary_max" type="number">
+            <meta>
+                <title lang="nl">Salaris maximum</title>
+            </meta>
+            <params>
+                <param name="min" value="0"/>
+            </params>
+        </property>
+
+        <property name="mobilephone" type="text_line">
+            <meta>
+                <title lang="nl">Mobiel nummer / Whatsapp</title>
+            </meta>
+        </property>
+
+        <property name="phonenumber" type="text_line">
+            <meta>
+                <title lang="nl">Telefoonnummer</title>
+            </meta>
+        </property>
+
+        <property name="email" type="text_line">
+            <meta>
+                <title lang="nl">E-mailadres</title>
+            </meta>
+        </property>
+
+        <property name="valid_through" type="date">
+            <meta>
+                <title lang="nl">Valid tot</title>
+            </meta>
+        </property>
+
+        <property name="block_image" type="media_selection" colspan="6">
+            <meta>
+                <title lang="nl">Afbeelding</title>
+            </meta>
+        </property>
+
+        <section name="joboffer_form">
+            <meta>
+                <title lang="nl">Sollicicatie formulier</title>
+            </meta>
+            <properties>
+                <property name="joboffer_image" type="media_selection" colspan="6">
+                    <meta>
+                        <title lang="nl">Afbeelding</title>
+                    </meta>
+                </property>
+
+                <property name="form_type" type="single_select" colspan="6">
+                    <meta>
+                        <title>Formulier type</title>
+                    </meta>
+
+                    <params>
+                        <param name="default_value" value="full"/>
+
+                        <param name="values" type="collection">
+                            <param name="full">
+                                <meta>
+                                    <title>Volledig</title>
+                                </meta>
+                            </param>
+
+                            <param name="short">
+                                <meta>
+                                    <title>Kort</title>
+                                </meta>
+                            </param>
+
+                            <param name="werkleer">
+                                <meta>
+                                    <title>Werken en leren</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="form" type="single_form_selection">
+                    <meta>
+                        <title lang="nl">Formulier</title>
+                    </meta>
+
+                    <params>
+                        <param name="resourceKey" value="page"/>
+                    </params>
+                </property>
+            </properties>
+        </section>
+    </properties>
+</template>

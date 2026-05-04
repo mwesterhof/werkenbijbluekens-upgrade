@@ -1,5 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends "base.html.twig" %}
 
 {% block content %}
-    <h1>Error {{ status_code }}: {{ status_text }}</h1>
+    <div class="container py-5 vh">
+        <div class="py-md-5">
+            <h1 class="text-dark">{{ status_code }}</h1>
+            <h2 class="h3 mb-3">{{ status_text }}</h2>
+            <div class="row">
+                <div class="col-md-7 col-lg-6 col-xl-5">
+                    <p>{{ exception.message }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

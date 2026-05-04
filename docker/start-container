@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Run any initialization tasks
+echo "Running initialization tasks for composer ..."
+# Start composer install in the background
+if [ ! -d vendor ]; then
+    composer install --no-interaction --no-progress &
+else
+    composer dump-autoload &
+fi
+
+echo "Running initialization tasks for node ..."
+# Start Webpack Encore in the background
+if [ ! -d node_modules ]; then
+    yarn install && yarn run watch &
+else
+    yarn run watch &
+fi
+
+# Start Apache in foreground mode (this keeps the container alive)
+exec apache2-foreground

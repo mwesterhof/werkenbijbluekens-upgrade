@@ -1,0 +1,130 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    {% include 'partials/hero.html.twig' with {
+        'image' : content.header_image,
+        'title' : content.title
+    } %}
+
+    {% for block in content.content_blocks %}
+        {% include "contentBlocks/#{block.type}.html.twig" with {
+            content: block,
+            view: view.content_blocks[loop.index0],
+        } only %}
+    {% endfor %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 d-flex align-items-end">
+                {% for image in content.contact_image %}
+                    <img src="{{ image.formats['700x'] }}" alt="{{ content.contact_title }}" class="img-fluid">
+                {% endfor %}
+            </div>
+            <div class="col-md-5 pb-5">
+                <h2 class="h4">{{ content.contact_title }}</h2>
+                {{ content.contact_text|raw }}
+            </div>
+            <div class="col-md-4 pb-5">
+                <div class="border border-secondary border-w-2 p-3">
+                    <h3 class="h6">Bezoekadres</h3>
+                    {{ content.adres|raw }}
+                    <h3 class="h6">Receptie</h3>
+                    {% set phone = content.reception_phonenumber|striptags|replace({' ': ''}) %}
+
+                    {% if phone|first == 0 %}
+                        {% set phone = phone|split('0', 2) %}
+                        {% set phone = '+31' ~ phone[0] ~ phone[1] %}
+                    {% endif %}
+                    <span class="font-weight-bold">Bel </span>
+                    <a href="tel:{{ phone }}" class="text-dark" title="Bel ons">
+
+                        {{ content.reception_phonenumber|raw }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'partials/jobs-listing-inline.html.twig'
+        with {
+            'jobs': content.joboffers
+        }
+    %}
+
+    <div class="position-relative">
+        <div id="map" class="mx-auto" style="height: 75vh;max-width: 1920px"></div>
+        <div class="position-absolute top-0 bottom-0 w-100">
+            <div class="container h-100 ">
+                <div class="position-absolute top-0 bottom-0 d-flex flex-column justify-content-between py-1 py-md-5">
+                    <div>
+                        <div class="p-3 bg-primary text-white">
+                            <h2 class="h4 text-white">Jouw nieuwe<br>werktijden?</h2>
+                            {{ content.opening_hours|raw }}
+                        </div>
+                    </div>
+                    <div>
+                        {%  include 'components/button-orange-with-arrow.html.twig'
+                            with {
+                            'label': 'Route naar Bluekens Truck en Bus',
+                            'url':  'https://www.google.nl/maps/dir//{{ content.location.street }}+{{ content.location.number }},+{{ content.location.town }}/@{{ content.location.lat }},{{ content.location.long }},17.16z/data=!4m9!4m8!1m0!1m5!1m1!1s0x47c42013215764ef:0x2abe6235328163a2!2m2!1d4.7202155!2d51.6087705!3e0',
+                            'target': 'blank',
+                            'width':'full',
+                            'target': 'blank'
+                        }
+                        %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {%  include 'partials/application.html.twig'
+        with {
+            'label': 'Stuur een open sollicitatie!'
+        }
+    %}
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% if content.location.lat is defined %}
+    <script>
+        // Initialize and add the map
+        function initMap() {
+            google.maps.Map.prototype.setCenterWithOffset= function(latlng, offsetX, offsetY) {
+                var map = this;
+                var ov = new google.maps.OverlayView();
+                ov.onAdd = function() {
+                    var proj = this.getProjection();
+                    var aPoint = proj.fromLatLngToContainerPixel(latlng);
+                    aPoint.x = aPoint.x+offsetX;
+                    aPoint.y = aPoint.y+offsetY;
+                    map.setCenter(proj.fromContainerPixelToLatLng(aPoint));
+                };
+                ov.draw = function() {};
+                ov.setMap(this);
+            };
+
+            // Using
+
+            var latlng = new google.maps.LatLng({{ content.location.lat }}, {{ content.location.long }});
+            var map = new google.maps.Map(document.getElementById("map"), {
+                zoom: {{ content.location.zoom }},
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                center: latlng,
+                disableDefaultUI: true
+            });
+            var marker = new google.maps.Marker({position: {lat: {{ content.location.lat }}, lng: {{ content.location.long }}}, map: map});
+
+            map.setCenterWithOffset(latlng, -100, -20);
+        }
+    </script>
+    
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARMhg0Tj4BKcxgdVu3P76YlaGGOBGl4cE&callback=initMap">
+    </script>
+    {% endif %}
+{% endblock %}

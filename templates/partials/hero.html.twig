@@ -1,0 +1,33 @@
+<div class="max-width_1920 mx-auto position-relative" style="--aspect-ratio:2.05/1">
+    <div class="text-center">
+        {% for image in image %}
+            <picture class="mx-auto">
+                <source srcset="{{ image.formats['1920x1080'] }}" media="(min-width: 1200px)">
+                <source srcset="{{ image.formats['1199x674'] }}" media="(min-width: 992px)">
+                <source srcset="{{ image.formats['991x557'] }}" media="(min-width: 576px)">
+                <source srcset="{{ image.formats['575x323'] }}" media="(min-width: 360px)">
+
+                <img src="{{ image.formats['1920x1080'] }}" alt="{{ title|raw }}" class="h-100 object-fit_cover w-100">
+            </picture>
+        {% endfor %}
+    </div>
+    <div class="position-absolute h-100 w-100 top-0 d-flex align-items-end">
+        <div class="container-xl pb-5">
+            <div class="align-items-start d-flex flex-column ml-xxl-n4">
+                {% if content.slogan is defined and content.slogan|length > 0 %}
+                    <span class="bg-primary d-inline-block font-weight-bold mb-n4 ml-2 px-2 py-0_5 text-4xl text-white z1">
+                        {{ content.slogan|raw }}
+                    </span>
+                    <h1 class="bg-dark d-inline-block pb-3 pt-5 px-4 text-white">
+                        {{ title|raw }}
+                    </h1>
+                {% else %}
+                    <h1 class="bg-dark d-inline-block p-3 text-white">
+                        {{ title|raw }}
+                    </h1>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>

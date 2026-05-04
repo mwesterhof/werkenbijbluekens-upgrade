@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    {% include 'partials/hero.html.twig' with {
+        'image' : content.header_image,
+        'title' : content.title
+    } %}
+
+
+    
+    <div class="container-xl py-5">
+        {% if content.page_intro|length > 0 %}
+        <div class="row">
+            <div class="col-md-7 col-12 py-3">
+                {{ content.page_intro|raw }}
+            </div>
+        </div>
+        {% endif %}
+        <div class="row">
+            {% for story in content.stories %}
+                <div class="col-12 col-md-6 col-xl-4">
+                    {%  include 'partials/list-item-story.html.twig'
+                        with {
+                        'images': story.excerptImages,
+                        'title': story.excerptTitle,
+                        'description': story.excerptDescription,
+                        'namePerson': story.namePerson,
+                        'url': story.url
+                    }
+                    %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% include 'partials/jobs-listing-inline.html.twig'
+        with {
+            'jobs': content.joboffers
+        }
+    %}
+
+    {%  include 'partials/application.html.twig'
+        with {
+            'label': 'Stuur een open sollicitatie!'
+        }
+    %}
+
+{% endblock %}

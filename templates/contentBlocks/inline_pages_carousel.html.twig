@@ -1,0 +1,36 @@
+<div class="bg-light bg-lg-white">
+    <div class="container-xl p-lg-0 max-width_1920">
+        <div class="row no-gutters">
+            <div class="col-12">
+                <div class="functiongroup_glide glide">
+
+                    <div class="glide__track" data-glide-el="track">
+                        <div class="glide__slides">
+
+                            {% for item in content.page_carousel %}
+                            <div class="item">
+                                {% include 'partials/carousel-item.html.twig'
+                                    with {
+                                        'story': item,
+                                        'readmoreLink': content.hide_readmore_link,
+                                        'sideLabel': content.hide_sidelabel
+                                    }
+                                %}
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        {%  include 'components/carousel-controlls.html.twig'
+                            with {
+                                'items': content.page_carousel,
+                                'label': 'waarden'
+                        }
+                        %}
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

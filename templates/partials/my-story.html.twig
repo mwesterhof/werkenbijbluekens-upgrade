@@ -1,0 +1,60 @@
+{% if bgcolor is defined %}
+    {% set bgcolor = bgcolor %}
+{% else %}
+    {% set bgcolor = 'bg-light' %}
+{% endif %}
+
+{% if story %}
+    <div class="{{ bgcolor }} py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-1 text-lg-nowrap justify-content-center align-items-center d-flex">
+                    <p class="lead mb-2 mb-lg-0 font-weight-regular text-lg-vertical">Mijn verhaal</p>
+                </div>
+                <div class="col-12 d-md-none d-lg-inline-block col-lg-5">
+                    {% for image in story.extension.excerpt.images %}
+                        <img src="{{ image.formats['552x435'] }}" alt="{{ story.content.name_person|raw  }}" class="img-fluid">
+                    {% endfor %}
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="row">
+                        <div class="d-none d-md-inline-block col-md-6 d-lg-none">
+                            {% for image in story.extension.excerpt.images %}
+                                <img src="{{ image.formats['552x435'] }}" alt="{{ story.content.name_person|raw  }}" class="img-fluid">
+                            {% endfor %}
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-12">
+                            <div class="h4 my-1">{{ story.extension.excerpt.title|raw }}</div>
+                            <h3 class="h6 text-black-50 text-uppercase mb-2 font-source-sans-pro">Mijn ervaring: {{ story.content.name_person|raw }}</h3>
+                        </div>
+                        <div class="col-12">
+                            <div class="mt-2">
+                                {{ story.extension.excerpt.description|raw }}
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-xl-6">
+                                    {%  include 'components/button-orange-outline.html.twig'
+                                        with {
+                                        'label': 'Lees ervaring',
+                                        'url':  story.content.url,
+                                        'extraClass': 'mb-1'
+                                        }
+                                    %}
+                                </div>
+                                <div class="col-12 col-xl-6">
+                                    {%  include 'components/button-orange.html.twig'
+                                        with {
+                                        'label': 'Lees alle ervaringen',
+                                        'url':  '/ervaringen',
+                                        'extraClass': 'mb-1'
+                                    }
+                                    %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

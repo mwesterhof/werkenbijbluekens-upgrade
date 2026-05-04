@@ -1,0 +1,6 @@
+<div class="container">
+    <h2 class="h5">
+        {{ content.block_title is defined ? content.block_title|raw : content.title|raw }}
+    </h2>
+    {{ content.block_text is defined ? content.block_text|raw : content.text|raw }}
+</div>

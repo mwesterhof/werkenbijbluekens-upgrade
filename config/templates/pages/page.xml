@@ -1,0 +1,146 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+
+    <key>page</key>
+
+    <view>pages/page</view>
+    <controller>Sulu\Bundle\WebsiteBundle\Controller\DefaultController::indexAction</controller>
+
+    <cacheLifetime>86400</cacheLifetime>
+
+    <meta>
+        <title lang="nl">Pagina</title>
+        <title lang="en">Page</title>
+    </meta>
+
+    <properties>
+
+        <xi:include href="includes/header.xml"
+                    xpointer="xmlns(sulu=http://schemas.sulu.io/template/template) xpointer(/sulu:properties/*)" />
+
+        <xi:include href="includes/resource_locator.xml"
+                    xpointer="xmlns(sulu=http://schemas.sulu.io/template/template) xpointer(/sulu:properties/*)" />
+
+        <property name="page_intro" type="text_area">
+            <meta>
+                <title lang="nl">Intro artikel</title>
+            </meta>
+        </property>
+                            
+        <xi:include href="includes/content_blocks.xml"
+                    xpointer="xmlns(sulu=http://schemas.sulu.io/template/template) xpointer(/sulu:properties/*)"/>
+
+        <property name="stories" type="smart_content">
+            <meta>
+                <title lang="nl">Verhalen</title>
+            </meta>
+            <params>
+                <param name="provider" value="pages"/>
+                <param name="max_per_page" value="1"/>
+                <param name="page_parameter" value="p"/>
+                <param name="properties" type="collection">
+                    <param name="article" value="article"/>
+                    <param name="excerptTitle" value="excerpt.title"/>
+                    <param name="excerptTags" value="excerpt.tags"/>
+                    <param name="excerptImages" value="excerpt.images"/>
+                    <param name="excerptDescription" value="excerpt.description"/>
+                </param>
+            </params>
+        </property>
+
+        <property name="joboffers" type="smart_content">
+            <meta>
+                <title lang="nl">Vacatures</title>
+            </meta>
+            <params>
+                <param name="provider" value="pages"/>
+                <param name="page_parameter" value="p"/>
+                <param name="properties" type="collection">
+                    <param name="article" value="article"/>
+                    <param name="excerptTitle" value="excerpt.title"/>
+                    <param name="excerptTags" value="excerpt.tags"/>
+                    <param name="excerptImages" value="excerpt.images"/>
+                    <param name="excerptDescription" value="excerpt.description"/>
+                </param>
+            </params>
+        </property>
+
+        <property name="function_profiles" type="smart_content">
+            <meta>
+                <title lang="nl">Functieprofielen</title>
+            </meta>
+
+            <params>
+                <param name="provider" value="pages"/>
+                <param name="max_per_page" value="30"/>
+                <param name="page_parameter" value="p"/>
+                <param name="properties" type="collection">
+                    <param name="article" value="article"/>
+                    <param name="excerptTitle" value="excerpt.title"/>
+                    <param name="excerptTags" value="excerpt.tags"/>
+                    <param name="excerptImages" value="excerpt.images"/>
+                    <param name="excerptDescription" value="excerpt.description"/>
+                    <param name="excerptMore" value="excerpt.more"/>
+                </param>
+            </params>
+        </property>
+
+        <property name="form_type" type="single_select" colspan="6">
+            <meta>
+                <title>Formulier type</title>
+            </meta>
+
+            <params>
+                <param name="default_value" value="full"/>
+
+                <param name="values" type="collection">
+                    <param name="full">
+                        <meta>
+                            <title>Volledig</title>
+                        </meta>
+                    </param>
+
+                    <param name="short">
+                        <meta>
+                            <title>Kort</title>
+                        </meta>
+                    </param>
+
+                    <param name="werkleer">
+                        <meta>
+                            <title>Werken en leren</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <section name="joboffer_form">
+            <meta>
+                <title lang="nl">Sollicicatie formulier</title>
+            </meta>
+            <properties>
+                <property name="joboffer_image" type="media_selection" colspan="6">
+                    <meta>
+                        <title lang="nl">Afbeelding</title>
+                    </meta>
+                </property>
+
+                <property name="form" type="single_form_selection">
+                    <meta>
+                        <title lang="nl">Formulier</title>
+                    </meta>
+
+                    <params>
+                        <param name="resourceKey" value="page"/>
+                    </params>
+                </property>
+            </properties>
+        </section>
+
+
+    </properties>
+</template>

@@ -1,0 +1,62 @@
+<section class="position-relative my-5">
+    <div class="container position-relative z1">
+        <div class="row">
+            <div class="col-lg-8 col-xl-6 mr-auto ml-auto">
+                <div class="bg-secondary p-3 pt-0_5">
+                    <div class="align-items-lg-center d-flex flex-column flex-lg-row text-center mb-0_5">
+                        <div>
+                            {% include "svg/bell.svg.twig" %}
+                        </div>
+                        <span class="font-weight-bold ml-lg-4 text-5xl text-lg-6xl text-uppercase text-white">
+                            {{ content.title|raw }}
+                        </span>
+                    </div>
+
+                    {% if content.text is defined and content.text|length > 0 %}
+                        <div class="mb-2 text-white">
+                            {{ content.text|raw }}
+                        </div>
+                    {% endif %}
+
+                    {% if content.form %}
+
+                        {% form_theme content.form with [
+                            'formthemes/bootstrap_4_jobalert.html.twig'
+                        ] %}
+
+                        {{ form_start(content.form, {'attr': {
+                            'id': 'cta',
+                            'data-gtm-label': content.tracking_title|default('CTA'),
+                            'novalidate': '',
+                            'class':'needs-validation ajaxform formstyle_clean_dark form_jobalert'
+                        }}) }}
+
+                            {# we make hidden fields of the two fields with labels: source__title and source__url #}
+                            {% include "formthemes/source_fields.html.twig" with { 'form': content.form} %}
+                            {% include "formthemes/automation_fields.html.twig" with { 'form': content.form} %}
+
+                            {# wrap all form fields inside this div se we can hide all fields when successfull submitted #}
+                            
+                            <div class="hide-when-success">
+                                {{ form_widget(content.form, { 'attr': {'class': 'align-items-lg-end d-flex flex-column flex-lg-row justify-content-between'} }) }}
+                            </div>
+
+                            <div class="alert alert-dismissible alert-success bg-transparent border-0 p-0 text-dark" data-gtm-label="{{ content.tracking_title|default('Whitepaper') }}" style="display:none;">
+                                    <h2 class="font-weight-demi mb-4 text-3xl w-75">
+                                        {{ content.cta_form_successtitle|default('Bericht') }}
+                                    </h2>
+                                    <p class="mb-4">
+                                        {{ content.cta_form_successtext|default('Verzonden') }}
+                                    </p>
+                            </div>
+                            
+                        {{ form_end(content.form) }}
+
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-light bottom-0 h-50 left-0 m-auto position-absolute right-0 top-0 w-100"></div>
+</section>

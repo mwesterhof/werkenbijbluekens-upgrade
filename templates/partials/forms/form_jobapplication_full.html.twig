@@ -1,0 +1,168 @@
+<div class="container-xl py-5 pb-lg-0" id="applicationformAnchor">
+    <div class="container p-0 px-sm-1 px-md-1 p-xl-0">
+        <div class="row">
+            <div class="col-12 col-lg-8 col-xl-6 d-flex flex-column justify-content-center">
+                {% if app.request.get('send') != 'true' %}
+                    <h2 class="line-height-1 pb-3 text-4xl text-dark">
+                        {{ label }}
+                        <br>
+                        <small>Alle velden zijn verplicht.</small>
+                    </h2>
+
+                    {# FORM THEME #}
+                    {# {% form_theme content.form '@SuluForm/themes/basic.html.twig' %} #}
+
+                    {% form_theme content.form with [
+                        'bootstrap_4_layout.html.twig',
+                        'formthemes/honeypot.html.twig'
+                    ] %}
+
+                    {{ form_start(content.form, {'attr': {
+                            'id': 'dynamic-form',
+                            'action' : '#applicationformAnchor'
+                    }}) }}
+
+                    <div class="row">
+                        <div class="form-group col-12">
+                            {{ form_widget(content.form.text, {'attr': {'class': 'form-control border-top-0 border-left-0 border-right-0 border-dark border-w-2' }}) }}
+                            {{ form_label(content.form.text, content.form.text.vars.label, {'label_attr': {'class': 'text-black-50'}}) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-12">
+                            {{ form_widget(content.form.text1, {'attr': {'class': 'form-control border-top-0 border-left-0 border-right-0 border-dark border-w-2' }}) }}
+                            {{ form_label(content.form.text1, content.form.text1.vars.label, {'label_attr': {'class': 'text-black-50'}}) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-12 col-md-6">
+                            {{ form_widget(content.form.text2, {'attr': {'class': 'form-control border-top-0 border-left-0 border-right-0 border-dark border-w-2' }}) }}
+                            {{ form_label(content.form.text2, content.form.text2.vars.label, {'label_attr': {'class': 'text-black-50'}}) }}
+                        </div>
+                        <div class="form-group col-12 col-md-6">
+                            {{ form_widget(content.form.text3, {'attr': {'class': 'form-control border-top-0 border-left-0 border-right-0 border-dark border-w-2' }}) }}
+                            {{ form_label(content.form.text3, content.form.text3.vars.label, {'label_attr': {'class': 'text-black-50'}}) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-12 col-md-6">
+                            {{ form_widget(content.form.text4, {'attr': {'class': 'form-control border-top-0 border-left-0 border-right-0 border-dark border-w-2' }}) }}
+                            {{ form_label(content.form.text4, content.form.text4.vars.label, {'label_attr': {'class': 'text-black-50'}}) }}
+                        </div>
+                        <div class="form-group col-12 col-md-6">
+                            {{ form_widget(content.form.text5, {'attr': {'class': 'form-control border-top-0 border-left-0 border-right-0 border-dark border-w-2' }}) }}
+                            {{ form_label(content.form.text5, content.form.text5.vars.label, {'label_attr': {'class': 'text-black-50'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group border border-secondary border-w-2 p-2">
+                        <div class="text-secondary font-weight-bold">
+                            <span class="text-uppercase">
+                                Verplichte velden
+                            </span>
+                            <br>
+                            <small class="">Zorg ervoor dat de bestanden niet groter dan 6MB zijn.</small>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 {{ content.form.attachment1 is defined ? 'col-md-6' }}">
+                            
+                                <div class="form-group file-area w-100 text-center border border-secondary font-weight-bold bg-white hover-bg-to-secondary hover-txt-to-white mt-2 text-secondary text-uppercase" style="border-style:dashed !important;">
+                                    <input type="file" name="{{ content.form.attachment.vars.full_name }}" id="{{ content.form.attachment.vars.full_name }}" required="required" />
+                                    <div class="file-dummy line-height-1">
+                                        <div class="success text-green">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="mb-0_5 text-green" width="36">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            <br>
+                                            Je CV is toegevoegd
+                                        </div>
+                                        <div class="default">Upload je CV</div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            {% if content.form.attachment1 is defined %}
+                                <div class="col-12 col-md-6">
+
+                                    <div class="form-group file-area w-100 text-center border border-secondary font-weight-bold bg-white hover-bg-to-secondary hover-txt-to-white mt-2 text-secondary text-uppercase" style="border-style:dashed !important;">
+                                        <input type="file" name="{{ content.form.attachment1.vars.full_name }}" id="{{ content.form.attachment1.vars.full_name }}" required="required" />
+                                        <div class="file-dummy line-height-1">
+                                            <div class="success text-green">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="mb-0_5 text-green" width="36">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                                <br>
+                                                Je motivatie is toegevoegd
+                                            </div>
+                                            <div class="default">Upload je motivatie</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            {%  endif %}
+                        </div>
+                    </div>
+
+                    {% if content.form.dropdown is defined %}
+                    <div class="row">
+                        <div class="form-group col-12">
+                            {{ form_widget(content.form.dropdown, {'attr': {'class': 'form-control border-top-0 border-left-0 border-right-0 border-dark border-w-2' }}) }}
+                            {{ form_label(content.form.dropdown, content.form.dropdown.vars.label, {'label_attr': {'class': 'text-black-50'}}) }}
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="form-group col-12 col-md-6 small">
+                            Door te solliciteren ga ik er mee akkoord dat Bluekens Truck en Bus bv mijn persoonsgegevens verwerkt volgens haar privacybeleid.
+                        </div>
+                        <div class="form-group col-12 col-md-6">
+                            {{ form_widget(content.form.submit, {'attr': {'class': 'w-100 text-center border bg-secondary border-secondary font-weight-bold hover-bg-to-dark justify-content-between no-deco px-2 py-0_5 text-white text-uppercase' }}) }}
+
+                            <p class="small pt-1 small text- text-black-50 text-center">
+                                <a href="/privacy-policy" class="text-dark" target="_self"><u>Lees hier ons privacybeleid.</u></a>
+                            </p>
+
+                        </div>
+                    </div>
+
+        
+                    <div class="form-group">
+                        <div class="font-italic">Wij streven er naar om je binnen vijf werkdagen te voorzien van een gepast antwoord.</div>
+                    </div>
+
+                    {% do content.form.attachment.setRendered %}
+                    {% if content.form.attachment1 is defined %}
+                        {% do content.form.attachment1.setRendered %}
+                    {% endif %}
+
+                    {{ form_widget(content.form.text6, {
+                            'attr': {'class': 'd-none' },
+                            'value': app.request.requesturi
+                        })
+                    }}
+
+                    {{ form_end(content.form) }}
+
+                {% else %}
+                    <div class="bg-primary p-5 text-white">
+                        {{ view.form.entity.successText|replace({ '<h5>': '<h5 class="text-white mb-2">'})
+                            |raw
+                        }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="d-none d-lg-flex col-lg-4 col-xl-6 {{ type is defined and type == 'form-left' ? 'order-last' : 'order-first' }}  align-items-end">
+                {% if content.joboffer_image %}
+                    {% for image in content.joboffer_image %}
+                        <img src="{{ image.formats['700x'] }}" alt="Solliciteer!" class="img-fluid">
+                    {% endfor %}
+                {% else %}
+                    {#
+                    <!-- no default image any more -->
+                    <img src="{{ asset('build/frontend/images/jobapplication.png') }}" alt="Solliciteer!" class="img-fluid">
+                    #}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

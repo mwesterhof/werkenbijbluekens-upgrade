@@ -1,0 +1,218 @@
+<?xml version="1.0" ?>
+<properties xmlns="http://schemas.sulu.io/template/template"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xi="http://www.w3.org/2001/XInclude" xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/properties-1.0.xsd">
+
+    <block name="buttons" default-type="page_button">
+        <meta>
+            <title>Buttons</title>
+        </meta>
+        <types>
+            <type name="page_button">
+                <meta>
+                    <title>Button naar andere pagina</title>
+                </meta>
+                <properties>
+                    <property name="btn_page" type="single_page_selection" colspan="4">
+                        <meta>
+                            <title>Pagina link</title>
+                        </meta>
+                    </property>
+                    <property name="btn_label" type="text_line" colspan="4">
+                        <meta>
+                            <title>Button label</title>
+                        </meta>
+                    </property>
+                    <xi:include href="./button_styles.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                          xpointer(/sulu:properties/sulu:property)" />
+                    <xi:include href="./button_icons.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                          xpointer(/sulu:properties/sulu:property)" />
+                </properties>
+            </type>
+            <type name="media_button">
+                <meta>
+                    <title>Button naar download</title>
+                </meta>
+                <properties>
+                    <property name="btn_media" type="single_media_selection" colspan="4">
+                        <meta>
+                            <title>Media link</title>
+                        </meta>
+                    </property>
+                    <property name="btn_label" type="text_line" colspan="4">
+                        <meta>
+                            <title>Button label</title>
+                        </meta>
+                    </property>
+                    <xi:include href="./button_styles.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                          xpointer(/sulu:properties/sulu:property)" />
+                    <xi:include href="./button_icons.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                          xpointer(/sulu:properties/sulu:property)" />
+                </properties>
+            </type>
+            <type name="url_button">
+                <meta>
+                    <title>Button naar externe url</title>
+                </meta>
+                <properties>
+                    <property name="btn_url" type="url" colspan="4">
+                        <meta>
+                            <title>Media link</title>
+                        </meta>
+                    </property>
+                    <property name="btn_label" type="text_line" colspan="4">
+                        <meta>
+                            <title>Button label</title>
+                        </meta>
+                    </property>
+                    <xi:include href="./button_styles.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                          xpointer(/sulu:properties/sulu:property)" />
+                    <xi:include href="./button_icons.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                          xpointer(/sulu:properties/sulu:property)" />
+                </properties>
+            </type>
+            <type name="anchor_button">
+                <meta>
+                    <title>Anker op deze pagina</title>
+                </meta>
+                <properties>
+                    <property name="btn_anchor" type="text_line">
+                        <meta>
+                            <title>Ankernaam</title>
+                        </meta>
+                    </property>
+                    <property name="btn_label" type="text_line" colspan="4">
+                        <meta>
+                            <title>Button label</title>
+                        </meta>
+                    </property>
+                    <xi:include href="./button_styles.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                          xpointer(/sulu:properties/sulu:property)" />
+                    <xi:include href="./button_icons.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                          xpointer(/sulu:properties/sulu:property)" />
+                </properties>
+            </type>
+            <type name="email_button">
+                <meta>
+                    <title>E-mail link</title>
+                </meta>
+                <properties>
+                    <property name="btn_email" type="email">
+                        <meta>
+                            <title>E-mailadres</title>
+                        </meta>
+                    </property>
+                    <property name="btn_label" type="text_line" colspan="4">
+                        <meta>
+                            <title>Button label</title>
+                        </meta>
+                    </property>
+                    <xi:include href="./button_styles.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                          xpointer(/sulu:properties/sulu:property)" />
+                    <xi:include href="./button_icons.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                          xpointer(/sulu:properties/sulu:property)" />
+                </properties>
+            </type>
+            <type name="phone_button">
+                <meta>
+                    <title>Telefoon link</title>
+                </meta>
+                <properties>
+                    <property name="btn_phone" type="phone">
+                        <meta>
+                            <title>Telefoonnummer</title>
+                        </meta>
+                    </property>
+                    <property name="btn_label" type="text_line" colspan="4">
+                        <meta>
+                            <title>Button label</title>
+                        </meta>
+                    </property>
+                    <xi:include href="./button_styles.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                          xpointer(/sulu:properties/sulu:property)" />
+                    <xi:include href="./button_icons.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                          xpointer(/sulu:properties/sulu:property)" />
+                </properties>
+            </type>
+            <type name="form_button">
+                <meta>
+                    <title>Formulier pop-up</title>
+                </meta>
+                <properties>
+                    <property name="btn_form" type="single_form_selection" colspan="12">
+                        <meta>
+                            <title>Formulier</title>
+                        </meta>
+                        <params>
+                            <param name="resourceKey" value="page"/>
+                        </params>
+                    </property>
+                    <property name="btn_label" type="text_line" colspan="6">
+                        <meta>
+                            <title>Button label</title>
+                        </meta>
+                    </property>
+                    <property name="form_title" type="text_line" colspan="12">
+                        <meta>
+                            <title>Formulier titel</title>
+                        </meta>
+                    </property>
+                    <property name="form_intro" type="text_area" colspan="12">
+                        <meta>
+                            <title>Formulier introtekst</title>
+                        </meta>
+                    </property>
+                    <xi:include href="./button_styles.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                          xpointer(/sulu:properties/sulu:property)" />
+                    <xi:include href="./button_icons.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                          xpointer(/sulu:properties/sulu:property)" />
+                </properties>
+            </type>
+            <type name="article_button">
+                <meta>
+                    <title>Button naar 'Article''</title>
+                </meta>
+                <properties>
+                    <property name="btn_article" type="single_article_selection" colspan="4">
+                        <meta>
+                            <title>Artikel link</title>
+                        </meta>
+                    </property>
+                    <property name="btn_label" type="text_line" colspan="4">
+                        <meta>
+                            <title>Button label</title>
+                        </meta>
+                    </property>
+                    <xi:include href="./button_styles.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                          xpointer(/sulu:properties/sulu:property)" />
+                    <xi:include href="./button_icons.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)
+                                          xpointer(/sulu:properties/sulu:property)" />
+                </properties>
+            </type>
+            <type name="automation_button">
+                <meta>
+                    <title>E-mailwall button</title>
+                </meta>
+                <properties>
+                    <property name="automation" type="snippet_selection">
+                        <meta>
+                            <title>E-mailwall</title>
+                        </meta>
+                        <params>
+                            <param name="types" value="automation"/>
+                        </params>
+                    </property>
+                    <property name="btn_label" type="text_line" colspan="12">
+                        <meta>
+                            <title>Button label</title>
+                        </meta>
+                    </property>
+                    <xi:include href="./button_styles.xml"
+                                xpointer="xmlns(sulu=http://schemas.sulu.io/template/template) xpointer(/sulu:properties/sulu:property)" />
+                    <xi:include href="./button_icons.xml"
+                                xpointer="xmlns(sulu=http://schemas.sulu.io/template/template) xpointer(/sulu:properties/sulu:property)" />
+                </properties>
+            </type>
+        </types>
+    </block>
+</properties>

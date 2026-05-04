@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+
+    <key>error-pages</key>
+
+    <meta>
+        <title lang="nl">Errorpagina</title>
+        <title lang="en">Error page</title>
+    </meta>
+
+    <areas>
+        <area key="errorpage_404">
+            <meta>
+                <title lang="nl">Errorpagina 404</title>
+                <title lang="en">Error page 404</title>
+            </meta>
+        </area>
+    </areas>
+
+    <properties>
+    
+        <property name="title" type="text_line" mandatory="true">
+            <meta>
+                <title lang="nl">Omschrijving</title>
+                <title lang="en">Description</title>
+            </meta>
+
+            <tag name="sulu.node.name"/>
+        </property>
+
+        <xi:include href="../pages/includes/content_blocks.xml"
+                    xpointer="xmlns(sulu=http://schemas.sulu.io/template/template) xpointer(/sulu:properties/*)"/>
+
+
+    </properties>
+      
+</template>

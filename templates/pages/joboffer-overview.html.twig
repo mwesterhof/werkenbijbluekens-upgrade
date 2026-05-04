@@ -1,0 +1,88 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+
+    {%  include 'partials/hero.html.twig'
+        with {
+            'image' : content.header_image,
+            'title' : content.title
+        }
+    %}
+
+    {# check if we have search-filter url-params,
+    used by: render(controller()) below
+    #}
+    {% set locationSearch = {'noLocation':''} %}
+    {% if app.request.get('vestiging') is defined %}
+        {% set location = app.request.get('vestiging') %}
+        {% set locationSearch =  { 'location': location } %}
+    {% endif %}
+
+    {% set functionProfileSearch = {'noProfile':''} %}
+    {% if app.request.get('functie') is defined %}
+        {% set functionProfile = app.request.get('functie') %}
+        {% set functionProfileSearch =  {'functionProfile': functionProfile} %}
+    {% endif %}
+    {# /END check #}
+
+    <div id="filterParent">
+        {%  include 'components/job_offer_filter.html.twig'
+            with {
+            'displayCount' : true,
+            'buttonLabel' : 'Filter',
+            'jsClass': 'js-filtersubmit'
+        }
+        %}
+    </div>
+
+    <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body p-0 bg-light">
+                    <div id="filterBody"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-width_1920 bg-dark d-lg-none">
+        <div class="container">
+            <div class="h6 js-jobsnum text-white py-2"></div>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <div class="row js-seachresults">
+            {{ render(controller(
+                'App\\Controller\\Website\\SearchController::results',
+                locationSearch, functionProfileSearch
+            )) }}
+
+        </div>
+    </div>
+   
+
+    {% set story = sulu_content_load(content.story) %}
+
+    {% include 'partials/my-story.html.twig' with {
+        'story': story,
+        'bgcolor': 'bg-light'
+    } %}
+
+    <a name="solliciteer"></a>
+    
+    {%  include 'partials/application.html.twig'
+        with {
+            'label': 'Stuur een open sollicitatie!'
+        }
+    %}
+
+    <div class="floating-buttons position-fixed w-100 bottom-0 d-lg-none z1">
+        <button type="button" class="d-flex w-100 align-items-center border bg-secondary border-secondary font-weight-bold hover-bg-to-dark justify-content-center no-deco px-2 py-0_5 text-white text-uppercase" data-toggle="modal" data-target="#filterModal">
+            Wijzig filter
+        </button>
+    </div>
+
+
+
+{% endblock %}

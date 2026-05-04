@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+
+    {% set pageContent = sulu_snippet_load_by_area('errorpage_404') %}
+
+    {% if pageContent %}
+        <div class="div py-5 vh">
+            {% for block in pageContent.content.content_blocks %}
+                {% include "contentBlocks/#{block.type}.html.twig" with {
+                    content: block,
+                    view: pageContent.view.content_blocks[loop.index0],
+                } only %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <pre>Let op: Geen Fragment/Snippet gedefineerd voor Area 'errorpage_404'</pre>
+    {% endif %}
+
+{% endblock %}

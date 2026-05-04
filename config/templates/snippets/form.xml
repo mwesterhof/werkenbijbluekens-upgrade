@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+
+    <key>form</key>
+
+    <meta>
+        <title lang="en">Form</title>
+        <title lang="nl">Formulier</title>
+    </meta>
+
+    <areas>
+        <area key="jobalert_form">
+            <meta>
+                <title>Job alert formulier</title>
+            </meta>
+        </area>
+    </areas>
+
+    <properties>
+        <property name="title" type="text_line" mandatory="true">
+            <meta>
+                <title lang="en">Title</title>
+                <title lang="nl">Titel</title>
+            </meta>
+
+            <tag name="sulu.node.name"/>
+        </property>
+
+        <property name="form" type="single_form_selection">
+            <meta>
+                <title lang="nl">Formulier</title>
+                <title lang="en">Form</title>
+            </meta>
+
+            <params>
+                <param name="resourceKey" value="page"/>
+            </params>
+        </property>
+    </properties>
+</template>

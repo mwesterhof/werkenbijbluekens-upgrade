@@ -1,0 +1,37 @@
+{#
+    We loop through fields here and look for 'source__title' and 'source__url'
+    If we have these fields. Make them hidden fields and set values with current page title and url
+#}
+
+{# form = formObjedct #}
+
+
+{% for row in form %}
+    {% if row.vars.label == 'source__title' %}
+    
+        {#  Most of the time we have a content.title.
+            When we do not have a content.title (we're inside a 'block'), get the parent title
+        #}
+
+        {% if content.title is defined %}
+            {% set titleContent = content.title %}
+        {% else %}
+            {% if _parent.uuid is defined %}
+                {% set titleContent = sulu_content_load(_parent.uuid).content.title|default('Geen titel gevonden') %}
+            {% else %}
+                {% set titleContent = 'Geen titel gevonden' %}
+            {% endif %}
+        {% endif %}
+   
+        <input type="hidden" name="{{ row.vars.full_name }}" id="{{ row.vars.id }}" value="{{ titleContent }}"/>
+        {% do row.setRendered %}
+    {% endif %}
+    {% if row.vars.label == 'source__url' %}
+        <input type="hidden" name="{{ row.vars.full_name }}" id="{{ row.vars.id }}" value="{{ app.request.requesturi|default('Geen requesturi gevonden') }}"/>
+        {% do row.setRendered %}
+    {% endif %}
+    {% if row.vars.label == 'source__referer' %}
+        <input type="hidden" name="{{ row.vars.full_name }}" id="{{ row.vars.id }}" value="{{ app.request.headers.get('referer')  | split('/', 4)[3]|default('/') }}"/>
+        {% do row.setRendered %}
+    {% endif %}
+{% endfor %}

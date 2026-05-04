@@ -1,7 +1,34 @@
-{% extends 'base.html.twig' %}
+{% extends "base.html.twig" %}
 
 {% block content %}
-    <h1>{{ content.title }}</h1>
 
-    {{ content.article|raw }}
+    {%  include 'partials/hero_homepage.html.twig'
+        with {
+            'image' : content.header_image,
+            'title' : content.title
+        }
+    %}
+
+    {% include 'partials/jobs-listing-inline.html.twig'
+        with {
+            'jobs': content.joboffers
+        }
+    %}
+
+    {% for block in content.content_blocks %}
+        {% include "contentBlocks/#{block.type}.html.twig" with {
+            content: block,
+            view: view.content_blocks[loop.index0],
+        } only %}
+    {% endfor %}
+
+    {%  include 'partials/application.html.twig'
+        with {
+            'label': 'Stuur een open sollicitatie!'
+        }
+    %}
+
+    {%  include 'partials/fixed-buttons.html.twig' %}
+
+
 {% endblock %}

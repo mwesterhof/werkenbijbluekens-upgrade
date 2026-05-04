@@ -1,0 +1,43 @@
+{% set colOffset = '' %}
+{% set colPadding = 'pr-lg-6' %}
+
+{% if image_position is defined %}
+    {% if image_position == 'left' %}
+        {% set colAlignment  = 'mr-auto' %}
+        {% set colOffset  = 'offset-lg-6' %}
+        {% set colPadding = 'pl-lg-6' %}
+    {% endif %}
+{% endif %}
+
+<div class="position-relative my-lg-6">
+    <div class="container position-relative z1 py-lg-5">
+        <div class="row">
+            <div class="{{ colOffset }} {{ colPadding }} col-lg-6 ">
+                <h3 class="mb-lg-2">
+                    {{ title|default('-- no title --')|raw }}
+                </h3>
+
+                <div class="pl-5">
+                    <p class="mb-0">
+                        {{ intro|default('-- no intro --') }}
+                    </p>
+
+                    {%  include 'components/button-orange-outline.html.twig'
+                        with {
+                            'label': button_label|default('-- no label --'),
+                            'url': button_url|default('#')
+                        }
+                    %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container-fluid position-absolute top-0 left-0 h-100 p-0">
+        <div class="row h-100">
+            <div class="{{ colAlignment|default('ml-auto') }} col-lg-6 h-100">
+                <img src="https://via.placeholder.com/1600x900" alt="" class="w-100 h-100 object-fit_cover">
+            </div>
+        </div>
+    </div>
+</div>

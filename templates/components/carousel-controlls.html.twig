@@ -1,0 +1,35 @@
+<div class="bg-md-primary">
+    <div class="container-xl p-0">
+        <div class="row no-gutters py-4">
+            <div class="col-4 offset-1">
+                <div class="align-items-center d-flex">
+                    <div class="glide__arrows" data-glide-el="controls">
+                        <a class="glide__arrow glide__arrow--left text-dark text-md-white cursor-pointer " data-glide-dir="<">
+                        
+                                <svg class="flip-x" xmlns="http://www.w3.org/2000/svg" width="33.978" height="14.382" viewBox="0 0 33.978 14.382"><path d="M285.321,75.983a1.039,1.039,0,0,0-.012-.124.95.95,0,0,0-.021-.13c-.012-.04-.029-.078-.045-.117s-.022-.068-.039-.1a.234.234,0,0,0-.019-.025c0-.008-.006-.017-.011-.025l-2.133-3.38,0,0-.644-1.021,0,0-1.145-1.814a.978.978,0,0,0-1.654,1.043h0l2.019,3.2.005,0,.954,1.513H266.264a.106.106,0,0,0-.019.005H252.321a.979.979,0,0,0,0,1.957H282.57l-.954,1.512-.005,0-2.019,3.2h0a.978.978,0,1,0,1.654,1.044l1.145-1.814,0,0,.644-1.02h0l2.133-3.38a.192.192,0,0,0,.011-.025c.006-.009.014-.015.019-.024.017-.032.025-.067.039-.1s.033-.077.045-.117a.964.964,0,0,0,.021-.131,1.02,1.02,0,0,0,.012-.124v-.006Z" transform="translate(-251.343 -68.795)" fill="currentColor"/></svg>
+                        
+                        </a>
+                    </div>
+                    <span class="d-none d-md-inline-block flex-grow-1 font-weight-bold small text-uppercase text-white text-center font-brother "> <span class="current_slide">1</span> / {{ items|length }} &nbsp;{{ label|default('-- no label --') }}</span>
+                </div>
+            </div>
+            <div class="d-none d-md-inline-block col">
+                <div class="align-items-center d-flex glide__bullets h-100" data-glide-el="controls[nav]">
+                    {% for item in items %}
+                        <button class="border-bottom border-left-0 border-right-0 border-top-0 flex-grow-1 glide__bullet p-0" data-glide-dir="={{ loop.index0 }}"></button>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-1 ml-auto">
+                <div class="glide__arrows text-right" data-glide-el="controls">
+                    <a class="glide__arrow glide__arrow--right text-dark text-md-white cursor-pointer " data-glide-dir=">">
+                      
+                        <svg xmlns="http://www.w3.org/2000/svg" width="33.978" height="14.382" viewBox="0 0 33.978 14.382"><path d="M285.321,75.983a1.039,1.039,0,0,0-.012-.124.95.95,0,0,0-.021-.13c-.012-.04-.029-.078-.045-.117s-.022-.068-.039-.1a.234.234,0,0,0-.019-.025c0-.008-.006-.017-.011-.025l-2.133-3.38,0,0-.644-1.021,0,0-1.145-1.814a.978.978,0,0,0-1.654,1.043h0l2.019,3.2.005,0,.954,1.513H266.264a.106.106,0,0,0-.019.005H252.321a.979.979,0,0,0,0,1.957H282.57l-.954,1.512-.005,0-2.019,3.2h0a.978.978,0,1,0,1.654,1.044l1.145-1.814,0,0,.644-1.02h0l2.133-3.38a.192.192,0,0,0,.011-.025c.006-.009.014-.015.019-.024.017-.032.025-.067.039-.1s.033-.077.045-.117a.964.964,0,0,0,.021-.131,1.02,1.02,0,0,0,.012-.124v-.006Z" transform="translate(-251.343 -68.795)" fill="currentColor"/></svg>
+                   
+                </a>
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="max-width_1920 mx-auto position-relative">
+    <div class="text-center" style="--aspect-ratio:2.1/1">
+        {% for image in image %}
+            <picture class="mx-auto">
+                <source srcset="{{ image.formats['1920x1080'] }}" media="(min-width: 1200px)">
+                <source srcset="{{ image.formats['1199x674'] }}" media="(min-width: 992px)">
+                <source srcset="{{ image.formats['991x557'] }}" media="(min-width: 576px)">
+                <source srcset="{{ image.formats['575x323'] }}" media="(min-width: 360px)">
+
+                <img src="{{ image.formats['1920x1080'] }}" alt="{{ title|raw }}" class="h-100 w-100 object-fit_cover">
+            </picture>
+        {% endfor %}
+    </div>
+    <div class="position-absolute h-100 w-100 top-0 d-flex align-items-end">
+        <div class="container-xl pb-5">
+            <h1 class="text-white">{{ title|raw }}</h1>
+            <div class="d-none d-lg-block">
+                {%  include 'components/job_offer_filter.html.twig'
+                    with {
+                    'displayCount' : false,
+                    'buttonLabel' : 'Vind mijn baan!',
+                    'offersLink' : '/vacatures',
+                    'extraClass': 'col bg-white col col-xl-12 col-xxl-10 p-0',
+                    'jsClass': 'js-findsubmit'
+                }
+                %}
+            </div>
+        </div>
+    </div>
+</div>

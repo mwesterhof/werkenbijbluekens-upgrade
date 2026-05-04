@@ -1,0 +1,196 @@
+{% set thebuttons = [] %}
+
+{#
+    because Symfony doens't like / can render the same form multiple times, we loop through all blocks with forms to see if the form is already renderded inside a modal.
+#}
+
+{# DRY: we use a Macro to crate modal contents #}
+{% macro modalContents(button) %}
+    {% set modalBody %}
+
+        {# {% if button.form_title is defined and button.form_title|length > 0 %}
+            <h2 class="fw-bold text-primary fs-4 m-0 mb-2">
+                {{ button.form_title }}
+            </h2>
+        {% endif %} #}
+
+        {% if button.form_intro is defined and button.form_intro|length > 0 %}
+            <p class="mb-4">
+                {{ button.form_intro }}
+            </p>
+        {% endif %}
+
+        <div>
+
+            {% set formtitle = 'formulier' %}
+            {% set successText = 'Uw bericht is verzonden. Bedankt!'|trans %}
+
+            {% if button.btn_form.vars.form.vars.value.form.translations[0].title is defined %}
+                {% set formtitle = button.btn_form.vars.form.vars.value.form.translations[0].title %}
+            {% endif %}
+            {% if button.btn_form.vars.form.vars.value.form.translations[0].successText is defined %}
+                {% set successText = button.btn_form.vars.form.vars.value.form.translations[0].successText %}
+            {% endif %}
+
+            {% form_theme button.btn_form
+                    with [
+                    'formthemes/bs4-custom.html.twig',
+                ]
+            %}
+
+            {{ form_start(button.btn_form, {'attr': {
+                'id': 'form' ~ button.btn_form.vars.id,
+                'data-gtm-label': 'formtitle',
+                'novalidate': '',
+                'class':'needs-validation ajaxform',
+                'action':'',
+                'autocomplete': 'off'
+            }}) }}
+
+            {% include "formthemes/source_fields.html.twig" with { 'form': button.btn_form} %}
+
+            <div class="hide-when-success">
+                {{ form_widget(button.btn_form) }}
+            </div>
+
+            <div class="alert alert-danger fail-message" style="display:none;">
+                {{ 'Er ging iets mis met het versturen. Probeer het opnieuw, of neem contact met ons op.'|trans }}
+                <div class="message"></div>
+            </div>
+
+            <div class="alert alert-dismissible alert-success bg-transparent border-0 p-0 text-dark" style="display:none;" data-gtm-label="{{ formtitle }}">
+                {{ successText|raw }}
+            </div>
+
+            {{ form_end(button.btn_form) }}
+        </div>
+    {% endset %}
+
+    {%  include 'partials/modals/bootstrap-modal.html.twig'
+        with {  'body': modalBody,
+                'title': button.form_title,
+                'modalSize': 'modal-lg',
+                'modalID' : 'modal_'~ button.btn_form.vars.id
+            }
+    %}
+{% endmacro %}
+
+{% set themodals = [] %}
+
+{% if content.buttons is defined and content.buttons|length > 0  %}
+    {% for button in content.buttons|filter(button => button.type == 'form_button') %}
+        
+        {% set formname  = button.btn_form.vars.id %}
+        {% if formname not in themodals %}
+            {% set themodals = themodals|merge([formname]) %}
+
+            {{ _self.modalContents(button) }} {# DRY: we use a Macro to crate modal contents #}
+        {% endif %}
+
+    {% endfor %}
+{% endif %}
+
+{% if content.blocks is defined and content.blocks|length > 0  %}
+
+    {% for block in content.blocks|filter(block => block.buttons is defined, block => block.buttons|length > 0) %}
+
+        {% for button in block.buttons|filter(button => button.type == 'form_button') %}
+            {% set formname  = button.btn_form.vars.id %}
+            {% if formname not in themodals %}
+                {% set themodals = themodals|merge([formname]) %}
+
+                {{ _self.modalContents(button) }} {# DRY: we use a Macro to crate modal contents #}
+            {% endif %}
+        {% endfor %}
+
+        {% for button in block.buttons|filter(button => button.type == 'automation_button') %}
+
+                {# we use the unique id's for this specific automation to make sure we do not include the same automation (and form) multiple times #}
+                {% set uniqueautomationname = button.automation[0].deal_pipeline_id ~ '_' ~ button.automation[0].deal_stage_id ~ '_' ~ button.automation[0].deal_owner_id  ~ '_' ~ button.automation[0].unique_tag %}
+
+                {% if uniqueautomationname not in thebuttons %}
+                    {% set thebuttons = thebuttons|merge([uniqueautomationname]) %}
+
+                    {% set modalBody %}
+                        {%  include 'partials/modals/automation-modal.html.twig'
+                            with {
+                                content: button
+                            } %}
+                    {% endset %}
+
+                    {%  include 'partials/modals/bootstrap-modal.html.twig'
+                        with {  'body': modalBody,
+                                'modalSize': '',
+                                'modalID' : 'modal-'~uniqueautomationname
+                            }
+                    %}
+                {% endif %}
+        {% endfor %}
+
+    {% endfor %}
+
+    {% for block in content.blocks|filter(block => block.articles.buttons is defined, block => block.articles.buttons|length > 0) %}
+
+        {% for button in block.articles.buttons|filter(button => button.type == 'form_button') %}
+            {% set formname  = button.btn_form.vars.id %}
+            {% if formname not in themodals %}
+                {% set themodals = themodals|merge([formname]) %}
+
+                {{ _self.modalContents(button) }} {# DRY: we use a Macro to crate modal contents #}
+            {% endif %}
+        {% endfor %}
+
+        {% for button in block.articles.buttons|filter(button => button.type == 'automation_button') %}
+
+                {# we use the unique id's for this specific automation to make sure we do not include the same automation (and form) multiple times #}
+                {% set uniqueautomationname = button.automation[0].deal_pipeline_id ~ '_' ~ button.automation[0].deal_stage_id ~ '_' ~ button.automation[0].deal_owner_id  ~ '_' ~ button.automation[0].unique_tag %}
+
+                {% if uniqueautomationname not in thebuttons %}
+                    {% set thebuttons = thebuttons|merge([uniqueautomationname]) %}
+
+                    {% set modalBody %}
+                        {%  include 'partials/modals/automation-modal.html.twig'
+                            with {
+                                content: button
+                            } %}
+                    {% endset %}
+
+                    {%  include 'partials/modals/bootstrap-modal.html.twig'
+                        with {  'body': modalBody,
+                                'modalSize': '',
+                                'modalID' : 'modal-'~uniqueautomationname
+                            }
+                    %}
+                {% endif %}
+        {% endfor %}
+
+    {% endfor %}
+
+    
+
+    {# deeply nested buttons #}
+    {% for item in content.blocks|filter(item => item.articles.columns is defined, item => item.articles.columns|length > 0) %}
+        {% for column in item.articles.columns|filter(column => column.buttons is defined, column => column.buttons|length > 0) %}
+            {% for button in column.buttons|filter(button => button.type == 'form_button') %}
+                {% set formname  = button.btn_form.vars.id %}
+                {% if formname not in themodals %}
+                    {% set themodals = themodals|merge([formname]) %}
+
+                    {{ _self.modalContents(button) }}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+
+    {% for block in content.blocks|filter(block => block.heroes.buttons is defined, block => block.heroes.buttons|length > 0) %}
+        {% for button in block.heroes.buttons|filter(button => button.type == 'form_button') %}
+            {% set formname  = button.btn_form.vars.id %}
+            {% if formname not in themodals %}
+                {% set themodals = themodals|merge([formname]) %}
+
+                {{ _self.modalContents(button) }} {# DRY: we use a Macro to crate modal contents #}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+    
+{% endif %}

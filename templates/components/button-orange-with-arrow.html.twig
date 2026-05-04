@@ -1,0 +1,12 @@
+{% set flexClass = 'd-inline-flex' %}
+
+{% if width is defined %}
+    {% if width == 'full' %}
+        {% set flexClass = 'd-flex' %}
+    {% endif %}
+{% endif %}
+
+<a href="{{ url|default('no-url-entered') }}" class="{{ flexClass }} align-items-center border border-secondary bg-secondary font-weight-bold font-size-btn hover-bg-to-dark justify-content-between no-deco px-2 py-0_5 text-white text-uppercase {{ extraClass is defined ? extraClass }}"  {{ target is defined ? 'target='~ target }}>
+    <span class="pr-4">{{ label|default('-- label --')|raw }}</span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="33.978" height="14.382" viewBox="0 0 33.978 14.382"><path d="M285.321,75.983a1.039,1.039,0,0,0-.012-.124.95.95,0,0,0-.021-.13c-.012-.04-.029-.078-.045-.117s-.022-.068-.039-.1a.234.234,0,0,0-.019-.025c0-.008-.006-.017-.011-.025l-2.133-3.38,0,0-.644-1.021,0,0-1.145-1.814a.978.978,0,0,0-1.654,1.043h0l2.019,3.2.005,0,.954,1.513H266.264a.106.106,0,0,0-.019.005H252.321a.979.979,0,0,0,0,1.957H282.57l-.954,1.512-.005,0-2.019,3.2h0a.978.978,0,1,0,1.654,1.044l1.145-1.814,0,0,.644-1.02h0l2.133-3.38a.192.192,0,0,0,.011-.025c.006-.009.014-.015.019-.024.017-.032.025-.067.039-.1s.033-.077.045-.117a.964.964,0,0,0,.021-.131,1.02,1.02,0,0,0,.012-.124v-.006Z" transform="translate(-251.343 -68.795)" fill="currentColor"/></svg>
+</a>

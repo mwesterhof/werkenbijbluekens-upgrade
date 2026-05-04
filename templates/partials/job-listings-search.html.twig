@@ -1,0 +1,12 @@
+{% set jobCount = jobs|length %}
+
+
+{% for job in jobs %}
+    <div class="col-12 col-md-6 col-xl-4">
+    {% include 'partials/list-item-joboffer.html.twig'
+        with {
+            'listitem': job
+        }
+    %}
+    </div>
+{% endfor %}
