@@ -1,13 +1,8 @@
-# yaml-language-server: $schema=../vendor/symfony/dependency-injection/Loader/schema/services.schema.json
-
-# This file is the entry point to configure your own services.
-# Files in the packages/ subdirectory configure your dependencies.
-# See also https://symfony.com/doc/current/service_container/import.html
-
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
 parameters:
     default_locale: en
+    joboffer_overview_uuid: '%env(JOBOFFER_OVERVIEW_UUID)%'
 
 services:
     # default configuration for services in *this* file
@@ -18,7 +13,61 @@ services:
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
-        resource: '../src/'
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    # add controllers as services that are specific to a certain sulu context
+    # a sulu context is a different mode in the kernel allowing to have a different set of services
+    # because controllers might rely on services only existing in one of both contexts
+    App\Controller\Admin\:
+        resource: '../src/Controller/Admin'
+        tags: ['controller.service_arguments', {name: 'sulu.context', context: 'admin'}]
+
+    App\Controller\Website\:
+        resource: '../src/Controller/Website'
+        tags: ['controller.service_arguments', {name: 'sulu.context', context: 'website'}]
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    sulu_website.event_subscriber.generator:
+        class: App\EventSubscriber\Generator
+        tags:
+            - kernel.event_subscriber
+
+    vzw.security_headers:
+        class: App\EventSubscriber\SecurityHeaders
+        tags:
+            - kernel.event_subscriber
+
+    sulu_form.dynamic.type_source:
+        class: App\Form\Types\Source
+        arguments:
+            $request: '@request_stack'
+        tags:
+            - name: sulu_form.dynamic.type
+              alias: Source
+
+    Massive\Bundle\SearchBundle\Search\SearchManagerInterface:
+        class: Massive\Bundle\SearchBundle\Search\SearchManager
+        bind:
+            $adapter: '@massive_search.adapter.zend_lucene'
+            $metadataProvider: '@massive_search.metadata.provider.chain'
+            $converter: '@massive_search.object_to_document_converter'
+            $eventDispatcher: '@event_dispatcher'
+            $indexNameDecorator: '@massive_search.index_name_decorator.default'
+            $fieldEvaluator: '@massive_search.metadata.field_evaluator'
+
+    sulu_search.controller.website_search:
+        class: App\Controller\Website\SearchController
+        public: true
+        bind:
+            $searchManager: '@massive_search.search_manager'
+        tags:
+            - { name: 'sulu.context', context: 'website' }

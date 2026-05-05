@@ -33,7 +33,7 @@
     {% include 'partials/seo/gtm_header.html.twig' %}
     {% include 'partials/favicon.html.twig' %}
 
-    <link rel="canonical" href="{{ app.request.server.get('REQUEST_SCHEME') ~ '://' ~ app.request.server.get('HTTP_HOST') ~ urls.nl }}">
+    {#<link rel="canonical" href="{{ app.request.server.get('REQUEST_SCHEME') ~ '://' ~ app.request.server.get('HTTP_HOST') ~ urls.nl }}"> #}
 
     {% block stylesheets %}
         {{ encore_entry_link_tags('frontend') }}

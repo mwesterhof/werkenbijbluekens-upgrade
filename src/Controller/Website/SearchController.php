@@ -8,7 +8,7 @@ use Massive\Bundle\SearchBundle\Search\QueryHit;
 use Massive\Bundle\SearchBundle\Search\SearchManagerInterface;
 use Sulu\Component\Content\Document\WorkflowStage;
 use Sulu\Component\Content\Repository\Mapping\MappingBuilder;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @package App\Controller\Website
  */
-class SearchController extends Controller
+class SearchController extends AbstractController
 {
     private SearchManagerInterface $searchManager;
 

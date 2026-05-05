@@ -5,16 +5,77 @@
 
     <!-- See: http://docs.sulu.io/en/latest/book/image-formats.html how to define image-formats -->
 
-    <!--
-    <format key="300x">
+    <format key="1920x1080">
         <meta>
-            <title lang="en">Example Image</title>
-            <title lang="de">Beispielbild</title>
+            <title lang="nl">Header 1920</title>
         </meta>
 
-        <scale x="300"/>
+        <scale x="1920" y="930"/>
     </format>
-    -->
+
+    <format key="1199x674">
+        <meta>
+            <title lang="nl">Header 1199</title>
+        </meta>
+
+        <scale x="1199" y="674"/>
+    </format>
+
+    <format key="991x557">
+        <meta>
+            <title lang="nl">Header 991</title>
+        </meta>
+
+        <scale x="991" y="557"/>
+    </format>
+
+    <format key="575x323">
+        <meta>
+            <title lang="nl">Header 575</title>
+        </meta>
+
+        <scale x="575" y="323"/>
+    </format>
+
+    <format key="552x435">
+        <meta>
+            <title lang="nl">listImage 552</title>
+        </meta>
+
+        <scale x="552" y="435"/>
+    </format>
+
+    <format key="700x">
+        <meta>
+            <title lang="nl">jobofferImage 700</title>
+        </meta>
+
+        <scale x="700"/>
+    </format>
+
+    <format key="x800">
+        <meta>
+            <title lang="nl">800px height image</title>
+        </meta>
+
+        <scale y="800"/>
+    </format>
+
+    <format key="800x800">
+        <meta>
+            <title lang="nl">Carousel images 800</title>
+        </meta>
+
+        <scale x="800" y="800"/>
+    </format>
+
+    <format key="1120x800">
+        <meta>
+            <title lang="nl">Storyblock image</title>
+        </meta>
+
+        <scale x="1120" y="800"/>
+    </format>
 
     <!--
     Render an image from the media_selection in a specific format the following way:
