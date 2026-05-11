@@ -1,0 +1,92 @@
+// pixel to rem calc: https://www.ninjaunits.com/converters/pixels/pixels-rem/
+
+html { font-size: 16px; } // set base to relate rem's
+
+.h1, h1 { color: $black; font-size: 1.90rem; line-height: 1.90rem; }
+.h2, h2 { color: $dark; font-size: 1.56rem; line-height: 1.2;}
+.h3, h3 { color: $dark;  font-size: 1.56rem; line-height: 1.2;}
+.h4, h4 { color: $dark;  font-size: 1.56rem; line-height: 1.2;}
+.h5, h5 { color: $dark;  font-size: 1.56rem; line-height: 1.2;}
+
+.font-size-btn { font-size: 14px;}
+
+
+.font-brother {
+    font-family: $headings-font-family;
+}
+
+.font-source-sans-pro {
+    font-family: 'Source Sans Pro';
+}
+
+.text-xs	{ font-size: 0.75rem !important; }
+.text-sm	{ font-size: 0.875rem !important; }
+.text-base	{ font-size: 1rem !important; }
+.text-lg	{ font-size: 1.125rem !important; }
+.text-xl	{ font-size: 1.25rem !important; }
+.text-2xl	{ font-size: 1.5rem !important; }
+.text-3xl	{ font-size: 1.875rem !important; }
+.text-4xl	{ font-size: 2.25rem !important; }
+.text-5xl	{ font-size: 3.5rem !important; }
+.text-6xl	{ font-size: 5rem !important; }
+.text-7xl	{ font-size: 7rem !important; }
+
+@each $key, $value in $grid-breakpoints {
+    @include media-breakpoint-up($key) {
+        .text-#{$key}-xs    { font-size: 0.75rem !important; }
+        .text-#{$key}-sm	{ font-size: 0.875rem !important; }
+        .text-#{$key}-base	{ font-size: 1rem !important; }
+        .text-#{$key}-lg	{ font-size: 1.125rem !important; }
+        .text-#{$key}-xl	{ font-size: 1.25rem !important; }
+        .text-#{$key}-2xl	{ font-size: 1.5rem !important; }
+        .text-#{$key}-3xl	{ font-size: 1.875rem !important; }
+        .text-#{$key}-4xl	{ font-size: 2.25rem !important; }
+        .text-#{$key}-5xl	{ font-size: 3rem !important; }
+        .text-#{$key}-6xl	{ font-size: 4rem !important; }
+    }
+}
+.line-height-1 {
+    line-height: 1;
+}
+
+.line-height-1_2 {
+    line-height: 1.2;
+}
+
+@include media-breakpoint-up(md) {
+    html { font-size: 16px; } // set base to relate rem's
+
+    .h1, h1 { font-size: 3.50rem; line-height: 3.70rem; }
+    .h2, h2 { font-size: 2.00rem; line-height: 2,20rem; }
+    .h3, h3 { font-size: 1.60rem; line-height: 1.80rem; } // -- adjusted
+    .h4, h4 { font-size: 1.20rem; line-height: 1.40rem; }
+    .h5, h5 { font-size: 1.10rem; line-height: 1.30rem; }
+
+    .font-size-btn { font-size: 11px;}
+}
+
+@include media-breakpoint-up(lg) {
+    html { font-size: 16px; } // set base to relate rem's
+
+    // .h1, h1 { font-size: 4.00rem; line-height: 7.00rem; }
+    // .h2, h2, .h2-lg { font-size: 5.00rem; line-height: 5.50rem; }
+    // .h3, h3 { font-size: 3.10rem; line-height: 4.0rem; } // -- adjusted
+    // .h4, h4 { font-size: 2.75rem; line-height: 3.25rem; }
+    // .h5, h5 { font-size: 1.80rem; line-height: 2.25rem; }
+
+    .font-size-btn { font-size: 14px;}
+}
+
+// @include media-breakpoint-up(xl) {
+//     html { font-size: 20px; } // set base to relate rem's
+
+//     // .h1, h1 { font-size: 7.00rem; line-height: 7.00rem; }
+//     // .h2, h2 { font-size: 5.00rem; line-height: 5.50rem; }
+//     // .h3, h3 { font-size: 3.50rem; line-height: 4.50rem; }
+//     // .h4, h4 { font-size: 2.75rem; line-height: 3.25rem; }
+//     // .h5, h5 { font-size: 1.80rem; line-height: 2.25rem; }
+
+//     .font-size-btn { font-size: 18px;}
+
+// }
+

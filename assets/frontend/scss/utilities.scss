@@ -1,0 +1,206 @@
+$sides: (top, bottom, left, right);
+$dimensions: (height, width);
+$extrasizes: map-merge($sizes, ("0": 0, "10": 10%, "20": 20%, "40": 40%, "60": 60%));
+
+// output ex: top-md-50 = top: 50%; for each of the bootstrap breakpoints and above sides and sizes
+
+@each $sizekey, $size in $extrasizes {
+    @each $side in $sides {
+        .#{$side}-#{$sizekey} {
+            #{$side}: #{$size} !important;
+        }
+    }
+}
+
+@each $key, $value in $grid-breakpoints {
+    @include media-breakpoint-up($key) {
+        @each $sizekey, $size in $extrasizes {
+            @each $side in $sides {
+                .#{$side}-#{$key}-#{$sizekey} {
+                    #{$side}: #{$size} !important;
+                }
+            }
+        }
+    }
+}
+
+// output ex: h-md-50 = height:50%; for each of the bootstrap breakpoints and above dimensions and sizes
+
+@each $key, $value in $grid-breakpoints {
+    @include media-breakpoint-up($key) {
+        @each $sizekey, $size in $extrasizes {
+            @each $dim in $dimensions {
+                .#{str-slice($dim, 1, 1)}-#{$key}-#{$sizekey} {
+                    #{$dim}: #{$size} !important;
+                }
+            }
+        }
+    }
+}
+
+// output ex: position-md-absolute = position: absolute; for each of the bootstrap breakpoints
+.d-grid {
+    display: grid;
+}
+.grid-column-gap-50 {
+    column-gap: 50px;
+}
+.grid-column-gap-100 {
+    column-gap: 100px;
+}
+.grid-column-gap-175 {
+    column-gap: 175px;
+}
+.gridcolumns-1 {
+    grid-template-columns: 1fr;
+    -ms-grid-template-columns: 1fr;
+}
+.gridcolumns-2 {
+    grid-template-columns: 1fr 1fr ;
+    -ms-grid-template-columns: 1fr 1fr ;
+}
+.gridcolumns-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+    -ms-grid-template-columns: 1fr 1fr 1fr;
+}
+
+@each $key, $value in $grid-breakpoints {
+    @include media-breakpoint-up($key) {
+        .position-#{$key}-absolute {
+            position: absolute !important;
+        }
+        .gridcolumns-#{$key}-1 {
+            grid-template-columns: 1fr;
+            -ms-grid-template-columns: 1fr;
+        }
+        .gridcolumns-#{$key}-2 {
+            grid-template-columns: 1fr 1fr;
+            -ms-grid-template-columns: 1fr 1fr;
+        }
+        .gridcolumns-#{$key}-3 {
+            grid-template-columns: 1fr 1fr 1fr;
+            -ms-grid-template-columns: 1fr 1fr 1fr;
+        }
+        .grid-column-gap-#{$key}-50 {
+            column-gap: 50px;
+        }
+        .grid-column-gap-#{$key}-100 {
+            column-gap: 100px;
+        }
+        .grid-column-gap-#{$key}-175 {
+            column-gap: 175px;
+        }
+    }
+}
+
+.font-weight-regular {
+    font-weight: 500;
+}
+.font-weight-semibold {
+    font-weight: 600;
+}
+
+.text-black {
+    color: $black;
+}
+
+.text-green {
+    color: #7ad214;
+}
+
+.ml_-100prct {
+    margin-left: -99%;
+}
+
+.no-deco {
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.object-fit_cover {
+    object-fit: cover;
+}
+
+.z1 {
+    z-index: 1;
+}
+
+.border-w-2 {
+    border-width: 2px !important;
+}
+.border-w-40 {
+    border-width: 40px !important;
+}
+
+.flip-x {
+    transform: scaleX(-1);
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.text-vertical {
+    transform:rotate(-90deg);
+}
+
+.max-width_1920 {
+    max-width: 1920px;
+}
+
+.margin-auto {
+    margin: auto;
+}
+
+@each $key, $value in $grid-breakpoints {
+    @include media-breakpoint-up($key) {
+        .text-#{$key}-vertical {
+            transform:rotate(-90deg);
+        }
+
+        .bg-#{$key}-white {
+            background-color: white !important;
+        }
+
+        .bg-#{$key}-primary {
+            background-color: $primary !important;
+        }
+
+        .text-#{$key}-white {
+            color: white !important;
+        }
+
+        .text-#{$key}-nowrap {
+            white-space: nowrap !important;
+        }
+    }
+}
+
+[style*="--aspect-ratio"]> :first-child {
+    width: 100%;
+}
+
+[style*="--aspect-ratio"]>img {
+    height: auto;
+}
+
+@supports (--custom:property) {
+    [style*="--aspect-ratio"] {
+        position: relative;
+    }
+
+    [style*="--aspect-ratio"]::before {
+        content: "";
+        display: block;
+        padding-bottom: calc(100% / (var(--aspect-ratio)));
+    }
+
+    [style*="--aspect-ratio"]> :first-child {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+}

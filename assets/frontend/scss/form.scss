@@ -1,0 +1,107 @@
+.file-area {
+    width: 100%;
+    position: relative;
+    
+    input[type=file] {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    
+    .file-dummy {
+      width: 100%;
+      padding: 30px;
+      background: rgba(255,255,255,0.2);
+      border: 2px dashed rgba(255,255,255,0.2);
+      text-align: center;
+      transition: background 0.3s ease-in-out;
+      
+      .success {
+        display: none;
+      }
+    }
+    
+    &:hover .file-dummy {
+      background: rgba(255,255,255,0.1);
+    }
+    
+    input[type=file]:focus + .file-dummy {
+      outline: 2px solid rgba(255,255,255,0.5);
+      outline: -webkit-focus-ring-color auto 5px;
+    }
+    
+    input[type=file]:valid + .file-dummy {
+      background-color: rgba(153,217,140,0.2);
+  
+      .success {
+        display: inline-block;
+      }
+      .default {
+        display: none;
+      }
+    }
+  }
+
+
+.form-group {
+  margin-bottom: 2rem;
+}
+
+.form-group>label {
+  bottom: 0px;
+  left: 30px;
+  position: absolute;
+  transition: 0.2s;
+  pointer-events:none;
+  outline: 0;
+}
+.form-control:focus {
+  box-shadow: none;
+}
+
+.form-control:focus~label {
+  bottom: 25px;
+  font-size: 0.9em;
+}
+
+.form-control:valid~label {
+  bottom: 25px;
+  font-size: 0.9em;
+}
+
+.form-control:has(option[selected])~label {
+  bottom: 25px;
+  font-size: 0.9em;
+}
+
+.dz-started button {
+  background-color: $secondary;
+  color: $white !important;
+}
+
+.form_jobalert {
+
+    ::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #ffffff;
+        opacity: .7;
+    }
+
+    :-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: #ffffff;
+        opacity: .7;
+    }
+
+    ::-ms-input-placeholder {
+        /* Microsoft Edge */
+        color: #ffffff;
+        opacity: .7;
+    }
+}

@@ -1,0 +1,49 @@
+.hover-bg-to-secondary,
+a.hover-bg-to-secondary,
+button.hover-bg-to-secondary {
+    &:hover {
+        background-color: $secondary !important;
+        border-color: $secondary !important;
+    }
+}
+.hover-txt-to-bold {
+    &:hover {
+        font-weight: bold !important;
+    }
+    &::before {
+        display: block;
+        content: attr(title);
+        font-weight: bold;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+    }
+}
+.hover-bg-to-dark,
+a.hover-bg-to-dark,
+button.hover-bg-to-dark {
+    &:hover {
+        background-color: $dark !important;
+        border-color: $dark !important;
+    }
+}
+
+.hover-txt-to-white,
+a.hover-txt-to-white,
+button.hover-txt-to-white{
+    &:hover {
+        color: $white !important;
+    }
+}
+
+.hover-txt-to-dark,
+a.hover-txt-to-dark,
+button.hover-txt-to-dark{
+    &:hover {
+        color: $dark !important;
+    }
+}
+
+#play-button:hover {
+    cursor: pointer;
+}

@@ -1,0 +1,34 @@
+.glide__slides {
+    white-space: inherit;
+
+    .item {
+        overflow: hidden;
+
+        .title,  .image {
+            opacity: 1;
+            transition: all 0.5s linear;
+        }
+
+        &:not(.glide__slide--active){
+
+            .title {
+                opacity: 0;
+            }
+
+            .image::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 15px;
+                right: 15px;
+                background: $blue_dark;
+                opacity: 0.8;
+            }
+        }
+    }
+}
+.glide__bullet--active {
+    height: 11px;
+}
+

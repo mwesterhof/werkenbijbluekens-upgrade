@@ -45,7 +45,7 @@
         <div class="row mb-4">
             <div class="col-12">
                 <div class="align-items-center bg-primary d-flex justify-content-between p-2">
-                
+
                     <span class="font-weight-regular h5 m-0 p-0 text-white">
 
                         {% if content.locations|length > 0 %}
@@ -60,7 +60,7 @@
                         {% else %}
                             / Parttime
                         {% endif %}
-                        
+
                         {% if content.number_of_hours|length > 0 %}
                             / {{ content.number_of_hours }} uur
                         {% endif %}
@@ -125,7 +125,7 @@
                     {% include 'svg/bluekens-cta-whatsapp.svg.twig' %}
 
                     <p class="font-weight-semibold m-0 text-white">
-                        Whatsapp                   
+                        Whatsapp
                     </p>
                 </a>
 
@@ -165,7 +165,7 @@
                             {% include "formthemes/automation_fields.html.twig" with { 'form': snippet.content.form} %}
 
                             {# wrap all form fields inside this div se we can hide all fields when successfull submitted #}
-                            
+
                             <div class="hide-when-success">
                                 {{ form_widget(snippet.content.form, { 'attr': {'class': ' '} }) }}
                             </div>
@@ -178,13 +178,13 @@
                                         voor de Job Alert
                                     </p>
                             </div>
-                            
+
                         {{ form_end(snippet.content.form) }}
 
                     {% endif %}
 
                 </div>
-                   
+
             {% endif %}
 
         </div>

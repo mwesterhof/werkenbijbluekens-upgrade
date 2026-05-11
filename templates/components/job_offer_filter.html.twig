@@ -19,7 +19,7 @@
 
         {% if job.locations is defined and job.locations|length  > 0 %}
             {% for joblocation in job.locations %}
-        
+
                 {% set location = sulu_content_load(joblocation.uuid) %}
                 {% if location.content.city not in locationOptions %}
                     {% set locationOptions = locationOptions|merge([ {  'city':location.content.city,
@@ -94,4 +94,3 @@
         </div>
     </div>
 </div>
-

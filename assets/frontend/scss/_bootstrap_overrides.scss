@@ -1,0 +1,22 @@
+// add some styling to the jobfilter-<selects>
+div.bootstrap-select {
+
+    .dropdown-item {
+        @extend .small;
+        @extend .px-2;
+        .check-mark {
+            @extend .text-secondary;
+        }
+        &.active,
+        &:active {
+            background-color: $primary;
+        }
+    }
+    .filter-option-inner-inner  {
+        padding-top: 6px;
+        @extend .font-weight-bold;
+        @extend .small;
+        @extend .text-secondary;
+        @extend .text-uppercase;
+    }
+}
