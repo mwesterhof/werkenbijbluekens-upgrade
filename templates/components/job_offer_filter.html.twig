@@ -1,6 +1,7 @@
 
 {# joboffer_overview_uuid from .env #}
-{% set joboffers =  sulu_content_load(joboffer_overview_uuid).content.joboffers %}
+{% set jobofferOverview = sulu_content_load(joboffer_overview_uuid) %}
+{% set joboffers = (jobofferOverview and jobofferOverview.content is defined and jobofferOverview.content.joboffers is defined and jobofferOverview.content.joboffers is not null) ? jobofferOverview.content.joboffers : [] %}
 
 
 {% set functionOptions = [] %}
@@ -11,7 +12,7 @@
     {% if (job.template is defined and job.template == 'joboffer') and (job.function_profile is defined and job.function_profile|length > 0) %}
 
         {% set function = sulu_content_load(job.function_profile) %}
-        {% if function.content.title not in functionOptions %}
+        {% if function and function.content is defined and function.content.title is defined and function.content.title not in functionOptions %}
             {% set functionOptions = functionOptions|merge([ {  'title': function.content.title,
                                                                 'uuid':function.uuid
                                                                 }]) %}
@@ -21,7 +22,7 @@
             {% for joblocation in job.locations %}
 
                 {% set location = sulu_content_load(joblocation.uuid) %}
-                {% if location.content.city not in locationOptions %}
+                {% if location and location.content is defined and location.content.city is defined and location.content.city not in locationOptions %}
                     {% set locationOptions = locationOptions|merge([ {  'city':location.content.city,
                                                                         'uuid':location.uuid,
                                                                         }]) %}

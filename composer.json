@@ -52,7 +52,8 @@
         "symfony/monolog-bundle": "^4.0",
         "symfony/runtime": "^7.4",
         "symfony/security-bundle": "^7.4",
-        "symfony/twig-bundle": "^7.4"
+        "symfony/twig-bundle": "^7.4",
+        "symfony/webpack-encore-bundle": "^2.4"
     },
     "require-dev": {
         "jangregor/phpstan-prophecy": "^2.0",
