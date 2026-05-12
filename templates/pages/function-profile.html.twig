@@ -22,27 +22,6 @@
                     } only %}
                 {% endfor %}
             </div>
-            <div class="col-md-5 col-lg-4 ml-lg-auto">
-                {% set story = sulu_content_load(content.story) %}
-
-                {% if story %}
-                    <div>
-                        {% include 'partials/list-item-story.html.twig'
-                            with {
-                                'images': story.extension.excerpt.images,
-                                'title': story.extension.excerpt.title,
-                                'description': story.extension.excerpt.description,
-                                'namePerson': story.content.name_person,
-                                'url': story.content.url
-                            }
-                        %}
-                    </div>
-                {% endif %}
-
-                {% include 'partials/share-this.html.twig' with {
-                    'label' : 'dit functieprofiel'
-                } %}
-            </div>
         </div>
     </div>
 

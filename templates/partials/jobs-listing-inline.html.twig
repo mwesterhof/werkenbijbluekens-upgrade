@@ -21,8 +21,10 @@
 
                             {% if job.location is defined %}
                                 {% set location = sulu_content_load(job.location) %}
-                                {% if location.content.city|length > 0 %}
-                                    {{ location.content.city }}
+                                {% if location %}
+                                    {% if location.content.city|length > 0 %}
+                                        {{ location.content.city }}
+                                    {% endif %}
                                 {% endif %}
                             {% endif %}
                         </span>
@@ -49,7 +51,7 @@
 
                 {% if alljobs_link is defined and alljobs_link|length > 0 %}
                     {% set page = sulu_content_load(alljobs_link) %}
-            
+
                     <div class="col-12 text-right">
                         {%  include 'components/button-blue.html.twig'
                             with {
@@ -59,7 +61,7 @@
                             }
                         %}
                     </div>
-                    
+
                 {% endif %}
             </div>
         </div>
