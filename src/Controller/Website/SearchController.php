@@ -6,9 +6,12 @@ namespace App\Controller\Website;
 
 use Massive\Bundle\SearchBundle\Search\QueryHit;
 use Massive\Bundle\SearchBundle\Search\SearchManagerInterface;
+use Sulu\Bundle\MediaBundle\Media\Manager\MediaManagerInterface;
 use Sulu\Component\Content\Document\WorkflowStage;
+use Sulu\Component\Content\Repository\ContentRepositoryInterface;
 use Sulu\Component\Content\Repository\Mapping\MappingBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,16 +23,23 @@ use Symfony\Component\HttpFoundation\Response;
 class SearchController extends AbstractController
 {
     private SearchManagerInterface $searchManager;
+    private ContentRepositoryInterface $contentRepository;
+    private MediaManagerInterface $mediaManager;
 
-    public function __construct(SearchManagerInterface $searchManager)
+    public function __construct(
+        SearchManagerInterface $searchManager,
+        #[Autowire(service: 'sulu_page.content_repository')]
+        ContentRepositoryInterface $contentRepository,
+        MediaManagerInterface $mediaManager
+    )
     {
         $this->searchManager = $searchManager;
+        $this->contentRepository = $contentRepository;
+        $this->mediaManager = $mediaManager;
     }
 
     public function results(Request $request): Response
     {
-        $contentRepository = $this->get('sulu_page.content_repository');
-
         // i18n:nl-excerpt-images
         $mapping = MappingBuilder::create()
             ->addProperties(
@@ -46,8 +56,6 @@ class SearchController extends AbstractController
                 ]
             )
             ->getMapping();
-
-        $mediaManager = $this->get('sulu_media.media_manager');
 
         $massiveQuery = $this->searchManager->createSearch(
             '(' . implode(' OR ', ['_structure_type:joboffer']) . ')'
@@ -74,7 +82,7 @@ class SearchController extends AbstractController
 
         $results = [];
         foreach ($res as $result) {
-            $jobOffer = $contentRepository->find($result->getId(), 'nl', 'werkenbijbluekens', $mapping);
+            $jobOffer = $this->contentRepository->find($result->getId(), 'nl', 'werkenbijbluekens', $mapping);
 
             $data = $jobOffer->getData();
 
@@ -123,7 +131,7 @@ class SearchController extends AbstractController
                 $media = json_decode($data['excerpt-images'], true);
 
                 if (count($media['ids']) > 0) {
-                    $tmpResult['excerptImage'] = $mediaManager->getById((int)$media['ids'][0], 'nl');
+                    $tmpResult['excerptImage'] = $this->mediaManager->getById((int)$media['ids'][0], 'nl');
                 }
                 $results[] = $tmpResult;
             }
